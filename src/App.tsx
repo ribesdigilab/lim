@@ -2,10 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
-
-
-
-
 export default function App() {
   const mountRef = useRef<HTMLDivElement>(null);
   const [currentColor, setCurrentColor] = useState("#8b0000");
@@ -32,6 +28,19 @@ export default function App() {
   useEffect(() => {
     if (!mountRef.current) return;
 
+     // Rimuovi eventuali canvas precedenti nel mount
+    while (mountRef.current.firstChild) {
+      mountRef.current.removeChild(mountRef.current.firstChild);
+    }
+    // Rimuovi drawCanvas esistente dal body
+    if (drawCanvasRef.current && document.body.contains(drawCanvasRef.current)) {
+      document.body.removeChild(drawCanvasRef.current);
+      drawCanvasRef.current = null;
+      drawCtxRef.current = null;
+      drawTextureRef.current = null;
+    }
+
+
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       45,
@@ -39,27 +48,19 @@ export default function App() {
       0.1,
       1000
     );
-    camera.position.set(0, 0, 5); // Davanti al piano
+    camera.position.set(0, 1, 0);
     camera.lookAt(0, 0, 0);
-if (mountRef.current.hasChildNodes()) {
-  console.warn("Canvas già montato, salto.");
-  return;
-}
+
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0xeeeeee);
-   mountRef.current.appendChild(renderer.domElement);
-
-
-   
-
-
+    mountRef.current.appendChild(renderer.domElement);
 
     const drawCanvas = document.createElement("canvas");
     drawCanvas.width = 4096;
     drawCanvas.height = 4096;
-    //drawCanvas.style.display = "none";
-    //document.body.appendChild(drawCanvas);
+    drawCanvas.style.display = "none";
+    document.body.appendChild(drawCanvas);
     drawCanvasRef.current = drawCanvas;
     const drawCtx = drawCanvas.getContext("2d");
     if (!drawCtx) return;
@@ -71,46 +72,38 @@ if (mountRef.current.hasChildNodes()) {
     drawTexture.magFilter = THREE.LinearFilter;
     drawTextureRef.current = drawTexture;
 
-    const loader = new GLTFLoader();
-   loader.load(
-  "/roccia.glb",
-  (gltf) => {
-    const model = gltf.scene;
+   const loader = new GLTFLoader();
+   loader.load("/roccia.glb", (gltf) => {
+  console.log("Contenuto GLTF:", gltf.scene.children);
 
-    model.traverse((child) => {
-  if ((child as THREE.Mesh).isMesh && !drawMeshRef.current) {
-    const mesh = child as THREE.Mesh;
-    const originalMaterial = mesh.material as THREE.MeshStandardMaterial;
+  const mesh = gltf.scene.children[0] as THREE.Mesh;
 
-    // Mesh con texture originale
-    const baseMesh = mesh.clone();
-    baseMesh.material = originalMaterial;
-    baseMesh.rotation.x = Math.PI / 2;
-    baseMesh.position.set(0, 0, 0);
-    scene.add(baseMesh);
-
-    // Mesh disegnabile
-    const drawMaterial = new THREE.MeshBasicMaterial({
-      map: drawTexture,
-      transparent: true,
-      depthWrite: false,
-    });
-
-    const drawMesh = new THREE.Mesh(mesh.geometry, drawMaterial);
-    drawMesh.position.copy(baseMesh.position);
-    drawMesh.rotation.copy(baseMesh.rotation);
-    drawMesh.scale.copy(baseMesh.scale);
-
-    drawMeshRef.current = drawMesh;
-    scene.add(drawMesh); // Mesh disegnabile sopra
+  if (!mesh || !(mesh instanceof THREE.Mesh)) {
+    console.warn("Nessuna mesh trovata o oggetto non valido:", mesh);
+    return;
   }
+
+  const originalMaterial = mesh.material as THREE.MeshStandardMaterial;
+
+  const drawLayer = new THREE.MeshStandardMaterial({
+    map: drawTexture,
+    normalMap: originalMaterial.normalMap,
+    transparent: true,
+    depthWrite: false,
+    side: THREE.DoubleSide,
+  });
+
+  mesh.material = [originalMaterial, drawLayer];
+  mesh.geometry.clearGroups();
+  mesh.geometry.addGroup(0, mesh.geometry.index!.count, 0);
+  mesh.geometry.addGroup(0, mesh.geometry.index!.count, 1);
+
+  drawMeshRef.current = mesh;
+  mesh.position.set(0, 0, 0);
+  scene.add(mesh);
+
+  console.log("Aggiunta mesh:", mesh);
 });
-  },
-  undefined,
-  (error) => {
-    console.error("Errore caricamento modello:", error);
-  }
-);
 
     scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 1));
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
@@ -121,11 +114,13 @@ if (mountRef.current.hasChildNodes()) {
 
     function handleDraw(e: PointerEvent) {
       if (!drawing || !drawCtxRef.current || !drawTextureRef.current || !drawMeshRef.current) return;
+
       pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
       pointer.y = -(e.clientY / window.innerHeight) * 2 + 1;
 
       raycaster.setFromCamera(pointer, camera);
-      const intersects = raycaster.intersectObject(drawMeshRef.current);
+      const intersects = raycaster.intersectObject(drawMeshRef.current, true);
+
       if (intersects.length > 0) {
         const uv = intersects[0].uv;
         if (!uv) return;
@@ -154,9 +149,7 @@ if (mountRef.current.hasChildNodes()) {
     canvas.addEventListener("pointerup", onUp);
     canvas.addEventListener("pointerleave", onLeave);
     canvas.addEventListener("pointermove", handleDraw);
-if (drawCanvas && document.body.contains(drawCanvas)) {
-  document.body.removeChild(drawCanvas);
-}
+
     const animate = () => {
       requestAnimationFrame(animate);
       renderer.render(scene, camera);
@@ -169,7 +162,6 @@ if (drawCanvas && document.body.contains(drawCanvas)) {
       canvas.removeEventListener("pointerleave", onLeave);
       canvas.removeEventListener("pointermove", handleDraw);
       mountRef.current?.removeChild(renderer.domElement);
-
       if (drawCanvas && document.body.contains(drawCanvas)) {
         document.body.removeChild(drawCanvas);
       }
