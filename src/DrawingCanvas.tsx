@@ -1,15 +1,21 @@
 // DrawingCanvas.tsx
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
+
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+
+
+export type DrawingCanvasHandle = {
+  resetCanvas: () => void;
+};
 
 interface DrawingCanvasProps {
   test: string;
   currentColor: string;
   pngImage: string;
 }
-
-export function DrawingCanvas({ test, currentColor, pngImage }: DrawingCanvasProps) {
+export const DrawingCanvas = forwardRef<DrawingCanvasHandle, DrawingCanvasProps>(
+function DrawingCanvas({ test, currentColor, pngImage }: DrawingCanvasProps, ref) {
   const mountRef = useRef<HTMLDivElement>(null);
   const offCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const drawCtxRef = useRef<CanvasRenderingContext2D | null>(null);
@@ -18,6 +24,15 @@ export function DrawingCanvas({ test, currentColor, pngImage }: DrawingCanvasPro
   const raycaster = new THREE.Raycaster();
   const pointer = new THREE.Vector2();
   const drawMeshRef = useRef<THREE.Mesh | null>(null);
+
+  useImperativeHandle(ref, () => ({
+      resetCanvas: () => {
+        if (offCanvasRef.current && drawCtxRef.current && drawTextureRef.current) {
+          drawCtxRef.current.clearRect(0, 0, offCanvasRef.current.width, offCanvasRef.current.height);
+          drawTextureRef.current.needsUpdate = true;
+        }
+      },
+    }));
 
   useEffect(() => {
     currentColorRef.current = currentColor;
@@ -159,4 +174,4 @@ export function DrawingCanvas({ test, currentColor, pngImage }: DrawingCanvasPro
   }, [test, pngImage]);
 
   return <div ref={mountRef} className="w-full h-full fixed top-0 left-0 -z-10" />;
-}
+});

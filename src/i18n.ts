@@ -7,6 +7,7 @@ const resources = {
       info: {
         title: 'Informazioni',
         text: 'Esempio testo informazioni',
+        
       },
       pigments: {
         'Rosso Scuro': 'Rosso Scuro',
@@ -16,6 +17,7 @@ const resources = {
         'Nero': 'Nero',
       },
       language: 'Lingua',
+      'Scegli il pigmento:': 'Scegli il pigmento'
     },
   },
   en: {
@@ -23,6 +25,7 @@ const resources = {
       info: {
         title: 'Information',
         text: 'Example info text',
+        
       },
       pigments: {
         'Rosso Scuro': 'Dark Red',
@@ -32,6 +35,7 @@ const resources = {
         'Nero': 'Black',
       },
       language: 'Language',
+      'Scegli il pigmento:': 'Choose the pigment '
     },
   },
   sc: {
@@ -39,6 +43,7 @@ const resources = {
       info: {
         title: 'Informatziones',
         text: 'Esempiu testu informatziones',
+        
       },
       pigments: {
         'Rosso Scuro': 'Arrùbiu scuru',
@@ -48,6 +53,7 @@ const resources = {
         'Nero': 'Neru',
       },
       language: 'Limba',
+      'Scegli il pigmento:': 'Scegli il pigmento'
     },
   },
 };
