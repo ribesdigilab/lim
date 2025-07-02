@@ -7,7 +7,6 @@ const resources = {
       info: {
         title: 'Informazioni',
         text: 'Esempio testo informazioni',
-        
       },
       pigments: {
         'Rosso Scuro': 'Rosso Scuro',
@@ -17,7 +16,9 @@ const resources = {
         'Nero': 'Nero',
       },
       language: 'Lingua',
-      'Scegli il pigmento:': 'Scegli il pigmento'
+      'Scegli il pigmento:': 'Scegli il pigmento',
+      'Scegli il simbolo': 'Scegli il simbolo',
+      'Scegli la Domus:': 'Scegli la Domus:',
     },
   },
   en: {
@@ -25,7 +26,6 @@ const resources = {
       info: {
         title: 'Information',
         text: 'Example info text',
-        
       },
       pigments: {
         'Rosso Scuro': 'Dark Red',
@@ -35,7 +35,9 @@ const resources = {
         'Nero': 'Black',
       },
       language: 'Language',
-      'Scegli il pigmento:': 'Choose the pigment '
+      'Scegli il pigmento:': 'Choose the pigment',
+      'Scegli il simbolo': 'Choose the symbol',
+      'Scegli la Domus:': 'Choose the Domus:',
     },
   },
   sc: {
@@ -43,7 +45,6 @@ const resources = {
       info: {
         title: 'Informatziones',
         text: 'Esempiu testu informatziones',
-        
       },
       pigments: {
         'Rosso Scuro': 'Arrùbiu scuru',
@@ -53,14 +54,16 @@ const resources = {
         'Nero': 'Neru',
       },
       language: 'Limba',
-      'Scegli il pigmento:': 'Scegli il pigmento'
+      'Scegli il pigmento:': 'Scegli il pigmento',
+      'Scegli il simbolo': 'Scegli su simbulu',
+      'Scegli la Domus:': 'Scegli sa Domus:',
     },
   },
 };
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: 'sc', // lingua iniziale
+  lng: 'sc',
   fallbackLng: 'it',
   interpolation: {
     escapeValue: false,
