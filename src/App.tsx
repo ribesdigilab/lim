@@ -19,6 +19,7 @@ export default function App() {
   const [color, setColor] = useState<string>('#000000');
   const [selectedTemple, setSelectedTemple] = useState<string | null>(null);
   const [selectedSymbol, setSelectedSymbol] = useState<string | null>(null);
+  const [showInfo, setShowInfo] = useState<boolean>(false);
 
   const pigments = [
     { name: 'Rosso Scuro', value: '#8b0000' },
@@ -80,6 +81,9 @@ export default function App() {
         onSelect={setColor}
         onReset={handleReset}
         onBack={handleBack}
+        //onSymbolChange={(symbol) => setSelectedSymbol(symbol)}
+        showInfo={showInfo}
+        setShowInfo={setShowInfo}
       />
 
       <DrawingCanvas

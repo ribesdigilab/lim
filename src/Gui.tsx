@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 type Pigment = { name: string; value: string };
@@ -9,10 +9,14 @@ interface PigmentSelectorProps {
   onSelect: (color: string) => void;
   onReset: () => void;
   onBack: () => void;
+  //onSymbolChange: (symbol: string) => void;
+  showInfo: boolean;
+  setShowInfo: (visible: boolean) => void;
 }
 
 export function PigmentSelector({ test, pigments, currentColor, onSelect, onReset, onBack }: PigmentSelectorProps) {
   const { t, i18n } = useTranslation();
+  const [activeInfo, setActiveInfo] = useState<string | null>(null);
   const changeLanguage = (lng: string) => i18n.changeLanguage(lng);
 
   return (
@@ -30,14 +34,19 @@ export function PigmentSelector({ test, pigments, currentColor, onSelect, onRese
           <h2 className="text-lg font-bold text-white/90 mb-2">{t('Scegli il pigmento:')}</h2>
           <div className="flex flex-col space-y-2">
             {pigments.map((p) => (
-              <button
-                key={p.value}
-                onClick={() => onSelect(p.value)}
-                className="flex items-center space-x-2"
-              >
-                <div className="w-6 h-6 rounded border" style={{ backgroundColor: p.value }} />
-                <span className="text-sm text-white/90">{t(`pigments.${p.name}`)}</span>
-              </button>
+              <div key={p.value} className="flex items-center space-x-2">
+                <button
+                  onClick={() => onSelect(p.value)}
+                  className="w-24 h-8 rounded-md border pointer-events-auto"
+                  style={{ backgroundColor: p.value }}
+                />
+                <button
+                  onClick={() => setActiveInfo(p.name)}
+                  className="w-6 h-6 rounded-full bg-white/20 text-white text-xs font-bold flex items-center justify-center pointer-events-auto"
+                >
+                  i
+                </button>
+              </div>
             ))}
             <button
               onClick={onReset}
@@ -54,6 +63,20 @@ export function PigmentSelector({ test, pigments, currentColor, onSelect, onRese
           </div>
         </div>
       </div>
+      {activeInfo && (
+         <div className="fixed inset-0 bg-black/70 z-[100] flex items-center justify-center p-8 pointer-events-auto">
+          <div className="relative bg-black/40 p-8 rounded-xl w-full max-w-7xl h-full flex flex-col justify-center items-center overflow-auto text-white">
+            <button
+              onClick={() => setActiveInfo(null)}
+              className="absolute top-4 right-4 text-white text-2xl font-bold"
+            >
+              ✕
+            </button>
+            <h2 className="text-3xl font-bold mb-4 text-center">{t(`pigments.${activeInfo}`)}</h2>
+            <p className="text-lg text-center">{t(`pigments.${activeInfo}`)}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
