@@ -57,7 +57,13 @@ export default function App() {
   return (
     <>
       <div className="absolute top-0 left-0 w-full flex justify-center mt-4 z-50">
-        <div className="bg-black/20 shadow-lg rounded-xl p-4 backdrop-blur-sm">
+        <div className="shadow-lg rounded-sm p-4 backdrop-blur-sm"
+          style={{
+            backgroundImage: "url('/Rectangle 1.png')",
+            backgroundSize: '100% 100%',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}>
           <h2 className="text-white/90 text-lg font-bold text-center mb-2">{t('Scegli il simbolo')}</h2>
           <div className="flex space-x-2 justify-center">
             {availableSymbols.map((sym, idx) => (

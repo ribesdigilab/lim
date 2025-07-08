@@ -6,7 +6,7 @@ export function LanguageSelector() {
   const { i18n } = useTranslation();
 
   return (
-    <div className="absolute bottom-0 right-0 m-4 p-4 bg-black/20 shadow-lg rounded-xl shadow-lg backdrop-blur-sm pointer-events-auto z-50">
+    <div className="absolute bottom-0 right-0 m-4 p-4 shadow-lg rounded-sm shadow-lg backdrop-blur-sm pointer-events-auto z-50" style={{ backgroundImage: "url('/Rectangle 1.png')", backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
       <div className="flex space-x-4 ">
             <button onClick={() => i18n.changeLanguage('sc')} title="Sardu">
               <svg className="w-6 h-4" viewBox="0 0 4 3">
