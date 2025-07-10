@@ -7,8 +7,8 @@ import { DrawingCanvas, DrawingCanvasHandle } from './DrawingCanvas';
 
 // Mappa simboli per ogni tempio (espandibile)
 const symbolsByTemple: Record<string, string[]> = {
-  domus1: ['/simbolo0.png'],
-  domus2: [],
+  Istevéne: ['/simbolo0.png'],
+  Montessu: ['/simbolo1.png'],
   domus3: [],
   domus4: [],
 };
@@ -16,6 +16,7 @@ const symbolsByTemple: Record<string, string[]> = {
 export default function App() {
   const { t } = useTranslation();
   const canvasRef = useRef<DrawingCanvasHandle>(null);
+  const [showStartScreen, setShowStartScreen] = useState(true);
   const [color, setColor] = useState<string>('#000000');
   const [selectedTemple, setSelectedTemple] = useState<string | null>(null);
   const [selectedSymbol, setSelectedSymbol] = useState<string | null>(null);
@@ -35,28 +36,65 @@ export default function App() {
     setSelectedSymbol(null);
   };
 
+
+
+   if (showStartScreen) {
+    return (
+      <div className="w-screen h-screen bg-black flex items-center justify-center">
+        <button
+          onClick={() => setShowStartScreen(false)}
+          className=" text-white px-8 py-4 text-2xl rounded  transition"style={{
+            backgroundImage: "url('/Rectangle 1.png')",
+            backgroundSize: '100% 100%',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',}}
+        >
+          {t('Il muro dei pigmenti')}
+          <br/>
+          <div className="text-sm mt-6">{t('Tocca per continuare')}</div>
+        </button>
+      </div>
+    );
+  }
   // Schermata iniziale
   if (!selectedTemple) {
     return (
-      <div className="w-screen h-screen bg-black flex flex-col items-center justify-center space-y-6">
+      <div className="w-screen h-screen bg-black flex flex-col items-center justify-center space-y-6"> 
         <LanguageSelector />
-        <h1 className="text-white text-4xl font-bold">{t('Scegli la Domus:')}</h1>
-        <div className="flex space-x-4">
-          <button className="bg-white text-black px-6 py-3 rounded" onClick={() => setSelectedTemple('domus1')}>Domus 1</button>
-          <button className="bg-gray-700 text-white px-6 py-3 rounded opacity-50 cursor-not-allowed">Domus 2</button>
-          <button className="bg-gray-700 text-white px-6 py-3 rounded opacity-50 cursor-not-allowed">Domus 3</button>
-          <button className="bg-gray-700 text-white px-6 py-3 rounded opacity-50 cursor-not-allowed">Domus 4</button>
+        <div className="p-8 flex flex-col items-center space-y-6" style={{
+          backgroundImage: "url('/Rectangle 1.png')",
+          backgroundSize: '100% 100%',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}>
+          <h1 className="text-white text-4xl font-bold">{t('Scegli la Domus')}</h1>
+          <div className="flex space-x-4">
+            <button className="bg-white text-black px-6 py-3 rounded" onClick={() => setSelectedTemple('Istevéne')}>Istevéne</button>
+            <button className="bg-gray-700 text-white px-6 py-3" onClick={() => setSelectedTemple('Montessu')}>Montessu</button>
+            <button className="bg-gray-700 text-white px-6 py-3 rounded opacity-50 cursor-not-allowed">Domus 3</button>
+            <button className="bg-gray-700 text-white px-6 py-3 rounded opacity-50 cursor-not-allowed">Domus 4</button>
+          </div>
         </div>
+        <button
+        onClick={() => setShowStartScreen(true)} // Torna alla schermata "Start"
+        className="absolute top-50% left-14 px-4 py-2 z-50 w-[5rem] h-[5rem]" style={{
+            backgroundImage: "url('/back.svg')",
+            backgroundSize: '100% 100%',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',}}
+      >
+        
+      </button>
       </div>
     );
   }
 
   // Simboli per tempio selezionato
   const availableSymbols = symbolsByTemple[selectedTemple] || [];
-
+  const firstSymbol = symbolsByTemple[selectedTemple]?.[0] ?? null;
   return (
     <>
-      <div className="absolute top-0 left-0 w-full flex justify-center mt-4 z-50">
+      <div className="absolute top-0 left-0 m-4 p-4 z-50">
         <div className="shadow-lg rounded-sm p-4 backdrop-blur-sm"
           style={{
             backgroundImage: "url('/Rectangle 1.png')",
@@ -66,16 +104,24 @@ export default function App() {
           }}>
           <h2 className="text-white/90 text-lg font-bold text-center mb-2">{t('Scegli il simbolo')}</h2>
           <div className="flex space-x-2 justify-center">
-            {availableSymbols.map((sym, idx) => (
-              <button
-                key={idx}
-                onClick={() => setSelectedSymbol(sym)}
-                className="w-10 h-10 bg-white/20 rounded hover:bg-white/30"
-                title={`Simbolo ${idx}`}
-              >
-                <img src={`Simbolo${idx}.svg`} alt={`Simbolo ${idx}`} className="w-full h-full object-cover" />
-              </button>
-            ))}
+            {availableSymbols.map((sym, idx) => {
+              const baseName = sym.replace(/^\/|\.png$/g, ''); // rimuove slash iniziale e .png
+              return (
+                <button
+                  key={idx}
+                  onClick={() => setSelectedSymbol(sym)}
+                  className="w-10 h-10 bg-white/20 rounded hover:bg-white/30"
+                  title={`Simbolo ${idx}`}
+                >
+                  <img
+                    src={`/${baseName}.svg`}
+                    alt={`Simbolo ${idx}`}
+                    className="w-full h-full object-cover"
+                  />
+                </button>
+              );
+            })}
+
           </div>
         </div>
       </div>
@@ -96,7 +142,7 @@ export default function App() {
         ref={canvasRef}
         test="/roccia.glb"
         currentColor={color}
-        pngImage={selectedSymbol ?? '/simbolo0.png'}
+        pngImage={selectedSymbol ?? firstSymbol}
       />
     </>
   );

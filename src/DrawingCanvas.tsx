@@ -151,6 +151,10 @@ function DrawingCanvas({ test, currentColor, pngImage }: DrawingCanvasProps, ref
     };
 
     const dom = renderer.domElement;
+    dom.style.touchAction = 'none';
+    dom.style.position = 'absolute';
+  
+    
     dom.addEventListener('pointerdown', onDown);
     dom.addEventListener('pointerup', onUp);
     dom.addEventListener('pointerleave', onLeave);

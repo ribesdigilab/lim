@@ -22,17 +22,7 @@ export function PigmentSelector({ test, pigments, currentColor, onSelect, onRese
   return (
     <div className="flex flex-col grid-cols-2 gap-4 relative h-full w-full pointer-events-none">
       
-        <div className="absolute top-0 left-0 m-4 p-4 shadow-lg rounded-sm backdrop-blur-sm pointer-events-autoz-50" style={{
-            backgroundImage: "url('/Rectangle 1.png')",
-            backgroundSize: '100% 100%',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            }}>
-          
-          <h2 className="text-lg font-bold text-white/90 mb-2">{t('info.title')}</h2>
-          <span className="text-sm text-white/90">{t('info.text')}</span>
-        </div>
-      
+       
 
       <div>
         <div className="absolute top-0 right-0 m-4 p-4 shadow-lg rounded-3xl shadow-lg backdrop-blur-sm pointer-events-auto z-50" style={{
@@ -76,7 +66,7 @@ export function PigmentSelector({ test, pigments, currentColor, onSelect, onRese
       {activeInfo && (
          <div className="fixed inset-0 bg-black/70 z-[100] flex items-center justify-center p-8 pointer-events-auto">
           <div className="relative  p-8 rounded-sm w-full max-w-7xl h-full flex flex-col justify-center items-center overflow-auto text-white" style={{
-    backgroundImage: "url('/Rectangle 1.png')",
+    backgroundImage: "url('/Rectangle 1.svg')",
     backgroundSize: '100% 100%',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
