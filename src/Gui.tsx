@@ -21,13 +21,13 @@ export function PigmentSelector({ test, pigments, currentColor, onSelect, onRese
       {/* Language controls moved to LanguageSelector component */}
 
       {/* Pigment selection panel */}
-      <div className="absolute top-0 right-0 m-4 p-4 shadow-lg rounded-3xl backdrop-blur-sm pointer-events-auto z-50" style={{
+      <div className="absolute top-0 mt-[12rem] right-0 m-4 p-4 shadow-lg rounded-3xl backdrop-blur-sm pointer-events-auto z-50" style={{
           backgroundImage: "url('/Rectangle 1.png')",
           backgroundSize: '100% 100%',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
         }}>
-        <h2 className="text-lg font-bold text-white/90 mb-2">{t('Scegli il pigmento:')}</h2>
+        <h2 className="text-lg font-bold text-white/90 mb-2"></h2>
         <div className="flex flex-col space-y-2">
           {pigments.map((p) => (
             <div key={p.value} className="flex items-center space-x-2">

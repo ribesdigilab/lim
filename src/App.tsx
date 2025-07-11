@@ -6,6 +6,7 @@ import { LanguageSelector } from './LanguageSelector';
 import { PigmentSelector } from './Gui';
 import { DrawingCanvas, DrawingCanvasHandle } from './DrawingCanvas';
 import { motion, AnimatePresence } from 'framer-motion';
+import { MapPanel } from './MapPanel';
 
 // Mappa simboli per ogni tempio (espandibile)
 const symbolsByTemple: Record<string, string[]> = {
@@ -90,7 +91,7 @@ export default function App() {
         {/* Back to Start */}
         <button
           onClick={() => setShowStartScreen(true)}
-          className="absolute left-6 bottom-6 w-[5rem] h-[5rem] z-50"
+          className="absolute left-6 bottom-10 w-[5rem] h-[5rem] z-50"
           style={{
             backgroundImage: "url('/back.svg')",
             backgroundSize: '100% 100%',
@@ -136,6 +137,7 @@ export default function App() {
           </div>
         </div>
       </div>
+      <MapPanel selectedTemple={selectedTemple!} />
         {/* Back to Domus */}
         <button
           onClick={handleTempleBack}
@@ -205,6 +207,7 @@ export default function App() {
       />
 
       <LanguageSelector />
+      <MapPanel selectedTemple={selectedTemple!} />
       <PigmentSelector
         test={t('language')}
         pigments={pigments}
