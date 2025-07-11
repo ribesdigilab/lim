@@ -177,5 +177,5 @@ function DrawingCanvas({ test, currentColor, pngImage }: DrawingCanvasProps, ref
     };
   }, [test, pngImage]);
 
-  return <div ref={mountRef} className="w-full h-full fixed top-0 left-0 -z-10" />;
+  return <div ref={mountRef} className="w-full h-full fixed top-0 left-0 z-0" />;
 });
