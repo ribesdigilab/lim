@@ -7,7 +7,7 @@ import { PigmentSelector } from './Gui';
 import { DrawingCanvas, DrawingCanvasHandle } from './DrawingCanvas';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPanel } from './MapPanel';
-
+import { SymbolPanel } from './Symbol';
 // Mappa simboli per ogni tempio (espandibile)
 const symbolsByTemple: Record<string, string[]> = {
   Istevéne: ['/simbolo0.png'],
@@ -107,41 +107,21 @@ export default function App() {
   if (selectedTemple && !selectedSymbol) {
     const availableSymbols = symbolsByTemple[selectedTemple] || [];
     return (
-      <div className="w-screen h-screen bg-black flex flex-col items-center justify-center space-y-6">
+      <div className="w-screen h-screen bg-black flex flex-col items-center justify-center ">
         <LanguageSelector />
         {/* Symbol panel */}
-        <div className="absolute top-0 left-0 m-4 p-4 z-50 h-[16rem] w-[8rem]">
-        <div
-          className="shadow-lg rounded-md p-4 backdrop-blur-sm"
-          style={{
-            backgroundImage: "url('/Rectangle 1.png')",
-            backgroundSize: '100% 100%',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
-        >
-          {/*<h2 className="text-white/90 text-lg font-bold text-center mb-2">{t('Scegli il simbolo')}</h2>*/}
-          <div className="flex space-x-2 justify-center rounded-lg mt-2 h-[30rem] w-auto">
-            {availableSymbols.map((sym, idx) => {
-              const base = sym.replace(/^\/+|\.png$/g, '');
-              return (
-                <button
-                  key={idx}
-                  onClick={() => setSelectedSymbol(sym)}
-                  className="w-10 h-10 rounded hover:bg-white/30"
-                >
-                  <img src={`/${base}.svg`} alt={`Symbol ${idx}`} className="w-full h-full object-cover" />
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </div>
+        <SymbolPanel
+  symbols={symbolsByTemple[selectedTemple] || []}
+  onSelect={sym => {
+    setSelectedSymbol(sym);
+    
+  }}
+/>
       <MapPanel selectedTemple={selectedTemple!} />
         {/* Back to Domus */}
         <button
           onClick={handleTempleBack}
-          className="absolute left-6 bottom-6 w-[5rem] h-[5rem] z-50"
+          className="absolute left-8 bottom-6 w-[5rem] h-[5rem] z-50"
           style={{
             backgroundImage: "url('/back.svg')",
             backgroundSize: '100% 100%',
@@ -167,37 +147,14 @@ export default function App() {
   return (
     <>
       {/* Symbol panel persistent */}
-      <div className="absolute top-0 left-0 m-4 p-4 z-50 h-[16rem] w-[8rem]">
-        <div
-          className="shadow-lg rounded-md p-4 backdrop-blur-sm"
-          style={{
-            backgroundImage: "url('/Rectangle 1.png')",
-            backgroundSize: '100% 100%',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
-        >
-          {/*<h2 className="text-white/90 text-lg font-bold text-center mb-2">{t('Scegli il simbolo')}</h2>*/}
-          <div className="flex space-x-2 justify-center rounded-lg mt-2 h-[30rem] w-auto">
-            {availableSymbols.map((sym, idx) => {
-              const base = sym.replace(/^\/+|\.png$/g, '');
-              return (
-                <button
-                  key={idx}
-                  onClick={() => setSelectedSymbol(sym)}
-                  className="w-10 h-10 rounded hover:bg-white/30"
-                >
-                  <img src={`/${base}.svg`} alt={`Symbol ${idx}`} className="w-full h-full object-cover" />
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </div>
+      <SymbolPanel
+    symbols={symbolsByTemple[selectedTemple] || []}
+    onSelect={sym => setSelectedSymbol(sym)}
+      />
       {/* Back to Symbol selection */}
       <button
         onClick={() => setSelectedSymbol(null)}
-        className="absolute left-6 bottom-6 w-[5rem] h-[5rem] z-50"
+        className="absolute left-8 bottom-6 w-[5rem] h-[5rem] z-50"
         style={{
           backgroundImage: "url('/back.svg')",
           backgroundSize: '100% 100%',

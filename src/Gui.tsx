@@ -61,20 +61,26 @@ export function PigmentSelector({ test, pigments, currentColor, onSelect, onRese
         <div className="fixed inset-0 bg-black/70 z-[100] flex items-center justify-center p-8 pointer-events-auto">
           <div className="relative p-8 rounded-sm w-full max-w-7xl h-full flex flex-col justify-center items-center overflow-auto text-white" style={{
             backgroundImage: "url('/Rectangle 1.png')",
-            backgroundSize: '100% 100%',
-            backgroundPosition: 'center',
+            backgroundSize: '100% 80%',
+            backgroundPosition: 'top',
             backgroundRepeat: 'no-repeat',
           }}>
-            <button
-              onClick={() => setActiveInfo(null)}
-              className="absolute top-4 right-4 text-white text-2xl font-bold"
-            >
-              ✕
-            </button>
+           
             <h2 className="text-3xl font-bold mb-4 text-center">{t(`pigments.${activeInfo}`)}</h2>
             <p className="text-lg text-center">{t(`pigments.${activeInfo}`)}</p>
           </div>
+          <button className="absolute bottom-16 w-[5rem] h-[5rem] pointer-events-auto"
+              onClick={() => setActiveInfo(null)}
+              style={{
+            backgroundImage: "url('/close.svg')",
+            backgroundSize: '100% 100%',
+            backgroundPosition: 'bottom',
+            backgroundRepeat: 'no-repeat',}}
+            >
+             
+            </button>
         </div>
+         
       )}
     </div>
   );
