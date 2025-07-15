@@ -1,0 +1,733 @@
+[
+  {
+    "slug": "anghelu_ruju",
+    "cardTitle": {
+      "ita": "Necropoli di Anghelu Ruju",
+      "eng": "Necropolis of Anghelu Ruju",
+      "srd": "Necropoli de Anghelu Ruju"
+    },
+    "location": {
+      "ita": "Comune di Alghero",
+      "eng": "Municipality of Alghero",
+      "srd": "Comunu de Alghero"
+    },
+    "mainTitle": {
+      "ita": "Necropoli di Anghelu Ruju",
+      "eng": "Necropolis of Anghelu Ruju",
+      "srd": "Necropoli de Anghelu Ruju"
+    },
+    "descTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    },
+    "description": {
+      "ita": "La più vasta necropoli prenuragica della Sardegna, con 38 tombe scavate nella roccia. Simbolo del profondo legame tra le comunità neolitiche e il culto dei morti.",
+      "eng": "The largest pre-Nuragic necropolis in Sardinia, with 38 rock-cut tombs. A symbol of the deep bond between Neolithic communities and the cult of the dead.",
+      "srd": "Sa prus manna necropoli prenuràgica de sa Sardigna, cun 38 domus de janas iscavati in sa roccia, simbulu de su prufundu ligamentu intre is comunitas neoliticas e su cultu de is mortos."
+    },
+    "pigmentTitle": {
+      "ita": "Pigmenti",
+      "eng": "Pigments",
+      "srd": "Pigmentus"
+    },
+    "pigmentInfoTitle": {
+      "ita": "Presenza di pigmenti",
+      "eng": "Presence of pigments",
+      "srd": "Presèntzia de pigmentus"
+    },
+    "pigmentDescTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    }
+  },
+  {
+    "slug": "puttu_codinu",
+    "cardTitle": {
+      "ita": "Necropoli di Puttu Codinu",
+      "eng": "Necropolis of Puttu Codinu",
+      "srd": "Necropoli de Puttu Codinu"
+    },
+    "location": {
+      "ita": "Comune di Villanova Monteleone",
+      "eng": "Municipality of Villanova Monteleone",
+      "srd": "Comunu de Biddanòa Monteleone"
+    },
+    "mainTitle": {
+      "ita": "Necropoli di Puttu Codinu",
+      "eng": "Necropolis of Puttu Codinu",
+      "srd": "Necropoli de Puttu Codinu"
+    },
+    "descTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    },
+    "description": {
+      "ita": "Nove tombe ipogeiche incastonate tra i rilievi di Monte Minerva. Testimonianza dei rituali collettivi delle comunità neolitiche.",
+      "eng": "Nine hypogeic tombs nestled among the hills of Monte Minerva, testimony to the collective rituals of Neolithic communities.",
+      "srd": "Nove domus de janas fràg is colinas de Monte Minerva, testimòniu de is ritualis collettivos de is comunitas neoliticas."
+    },
+    "pigmentTitle": {
+      "ita": "Pigmenti",
+      "eng": "Pigments",
+      "srd": "Pigmentus"
+    },
+    "pigmentInfoTitle": {
+      "ita": "Presenza di pigmenti",
+      "eng": "Presence of pigments",
+      "srd": "Presèntzia de pigmentus"
+    },
+    "pigmentDescTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    }
+  },
+  {
+    "slug": "monte_siseri",
+    "cardTitle": {
+      "ita": "Necropoli di Monte Siseri / S’Incantu",
+      "eng": "Necropolis of Monte Siseri / S’Incantu",
+      "srd": "Necropoli de Monte Siseri / S’Incantu"
+    },
+    "location": {
+      "ita": "Comune di Putifigari",
+      "eng": "Municipality of Putifigari",
+      "srd": "Comunu de Putifigari"
+    },
+    "mainTitle": {
+      "ita": "Necropoli di Monte Siseri / S’Incantu",
+      "eng": "Necropolis of Monte Siseri / S’Incantu",
+      "srd": "Necropoli de Monte Siseri / S’Incantu"
+    },
+    "descTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    },
+    "description": {
+      "ita": "Domus de janas celebri per le raffinate decorazioni interne, simboli di un profondo culto dei defunti.",
+      "eng": "Domus de janas famous for their refined interior decorations, symbols of a deep cult of the dead.",
+      "srd": "Domus de janas celèbris po is refinadas decoratzionis internas, simbolus de unu prufundu cultu de is defuntos."
+    },
+    "pigmentTitle": {
+      "ita": "Pigmenti",
+      "eng": "Pigments",
+      "srd": "Pigmentus"
+    },
+    "pigmentInfoTitle": {
+      "ita": "Presenza di pigmenti",
+      "eng": "Presence of pigments",
+      "srd": "Presèntzia de pigmentus"
+    },
+    "pigmentDescTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    }
+  },
+  {
+    "slug": "mesu_e_montes",
+    "cardTitle": {
+      "ita": "Necropoli di Mesu ’e Montes",
+      "eng": "Necropolis of Mesu ’e Montes",
+      "srd": "Necropoli de Mesu ’e Montes"
+    },
+    "location": {
+      "ita": "Comune di Ossi",
+      "eng": "Municipality of Ossi",
+      "srd": "Comunu de Ossi"
+    },
+    "mainTitle": {
+      "ita": "Necropoli di Mesu ’e Montes",
+      "eng": "Necropolis of Mesu ’e Montes",
+      "srd": "Necropoli de Mesu ’e Montes"
+    },
+    "descTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    },
+    "description": {
+      "ita": "Diciotto domus de janas scolpite nella roccia ai piedi del Monte Mamas, ricche di simboli e antichi rituali funerari.",
+      "eng": "Eighteen domus de janas carved into the rock at the foot of Monte Mamas, rich in symbols and ancient funeral rituals.",
+      "srd": "Dezdot domus de janas isculpidas in sa roccia a is pèis de su Monte Mamas, riccas de simbolus e antigos ritualis funeràrius."
+    },
+    "pigmentTitle": {
+      "ita": "Pigmenti",
+      "eng": "Pigments",
+      "srd": "Pigmentus"
+    },
+    "pigmentInfoTitle": {
+      "ita": "Presenza di pigmenti",
+      "eng": "Presence of pigments",
+      "srd": "Presèntzia de pigmentus"
+    },
+    "pigmentDescTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    }
+  },
+  {
+    "slug": "su_crucifissu_mannu",
+    "cardTitle": {
+      "ita": "Necropoli di Su Crucifissu Mannu",
+      "eng": "Necropolis of Su Crucifissu Mannu",
+      "srd": "Necropoli de Su Crucifissu Mannu"
+    },
+    "location": {
+      "ita": "Comune di Porto Torres",
+      "eng": "Municipality of Porto Torres",
+      "srd": "Comunu de Portu Torres"
+    },
+    "mainTitle": {
+      "ita": "Necropoli di Su Crucifissu Mannu",
+      "eng": "Necropolis of Su Crucifissu Mannu",
+      "srd": "Necropoli de Su Crucifissu Mannu"
+    },
+    "descTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    },
+    "description": {
+      "ita": "Una delle necropoli più estese della Sardegna settentrionale, con domus de janas ornate da simboli legati al culto dei defunti.",
+      "eng": "One of the largest necropolises in northern Sardinia, with domus de janas adorned with symbols related to the cult of the dead.",
+      "srd": "Una de is necropolis prus istesas de sa Sardigna setentrionali, cun domus de janas ornadas de simbolus ligaus a su cultu de is defuntos."
+    },
+    "pigmentTitle": {
+      "ita": "Pigmenti",
+      "eng": "Pigments",
+      "srd": "Pigmentus"
+    },
+    "pigmentInfoTitle": {
+      "ita": "Presenza di pigmenti",
+      "eng": "Presence of pigments",
+      "srd": "Presèntzia de pigmentus"
+    },
+    "pigmentDescTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    }
+  },
+  {
+    "slug": "orto_beneficio",
+    "cardTitle": {
+      "ita": "Domus de janas dell’Orto del Beneficio Parrocchiale",
+      "eng": "Domus de Janas of Orto del Beneficio Parrocchiale",
+      "srd": "Domus de janas de s’Ortu de su Benefìtziu Parrocchiali"
+    },
+    "location": {
+      "ita": "Comune di Sennori",
+      "eng": "Municipality of Sennori",
+      "srd": "Comunu de Sènnori"
+    },
+    "mainTitle": {
+      "ita": "Domus de janas dell’Orto del Beneficio Parrocchiale",
+      "eng": "Domus de Janas of Orto del Beneficio Parrocchiale",
+      "srd": "Domus de janas de s’Ortu de su Benefìtziu Parrocchiali"
+    },
+    "descTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    },
+    "description": {
+      "ita": "Due domus de janas scavate nella roccia calcarea, testimonianza di rituali funerari neolitici nel cuore del centro abitato di Sennori.",
+      "eng": "Two domus de janas carved into limestone rock, testimony to Neolithic funeral rituals in the heart of Sennori.",
+      "srd": "Duas domus de janas iscavadas in sa pedra calcària, testimòniu de is ritualis funeràrius neoliticos in su coru de Sènnori."
+    },
+    "pigmentTitle": {
+      "ita": "Pigmenti",
+      "eng": "Pigments",
+      "srd": "Pigmentus"
+    },
+    "pigmentInfoTitle": {
+      "ita": "Presenza di pigmenti",
+      "eng": "Presence of pigments",
+      "srd": "Presèntzia de pigmentus"
+    },
+    "pigmentDescTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    }
+  },
+  {
+    "slug": "roccia_elefante",
+    "cardTitle": {
+      "ita": "Domus de janas della Roccia dell’Elefante",
+      "eng": "Domus de Janas of Roccia dell’Elefante",
+      "srd": "Domus de janas de sa Roccia de s’Elefanti"
+    },
+    "location": {
+      "ita": "Comune di Castelsardo",
+      "eng": "Municipality of Castelsardo",
+      "srd": "Comunu de Castheddu Sardu"
+    },
+    "mainTitle": {
+      "ita": "Domus de janas della Roccia dell’Elefante",
+      "eng": "Domus de Janas of Roccia dell’Elefante",
+      "srd": "Domus de janas de sa Roccia de s’Elefanti"
+    },
+    "descTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    },
+    "description": {
+      "ita": "Celebre per la sua forma naturale che ricorda un elefante, la roccia ospita due domus de janas scavate nella pietra vulcanica.",
+      "eng": "Famous for its natural elephant-like shape, the rock hosts two domus de janas carved into volcanic stone.",
+      "srd": "Celèbre po sa forma naturali chi pare unu elefanti, sa rocca ospitat duas domus de janas iscavadas in pedra vulcànica."
+    },
+    "pigmentTitle": {
+      "ita": "Pigmenti",
+      "eng": "Pigments",
+      "srd": "Pigmentus"
+    },
+    "pigmentInfoTitle": {
+      "ita": "Presenza di pigmenti",
+      "eng": "Presence of pigments",
+      "srd": "Presèntzia de pigmentus"
+    },
+    "pigmentDescTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    }
+  },
+  {
+    "slug": "parco_petroglifi",
+    "cardTitle": {
+      "ita": "Parco dei Petroglifi",
+      "eng": "Petroglyph Park",
+      "srd": "Parcu de is Petroglìffios"
+    },
+    "location": {
+      "ita": "Comune di Cheremule",
+      "eng": "Municipality of Cheremule",
+      "srd": "Comunu de Cherèmule"
+    },
+    "mainTitle": {
+      "ita": "Parco dei Petroglifi",
+      "eng": "Petroglyph Park",
+      "srd": "Parcu de is Petroglìffios"
+    },
+    "descTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    },
+    "description": {
+      "ita": "Un museo a cielo aperto con incisioni rupestri che raffigurano simboli e scene di vita quotidiana preistorica.",
+      "eng": "An open‑air museum with rock carvings depicting symbols and scenes of prehistoric daily life.",
+      "srd": "Un museu a celu aberthu cun intzisionis rupèstris chi raffigurant simbolus e scenas de sa bida cotidiana preistòrica."
+    },
+    "pigmentTitle": {
+      "ita": "Pigmenti",
+      "eng": "Pigments",
+      "srd": "Pigmentus"
+    },
+    "pigmentInfoTitle": {
+      "ita": "Presenza di pigmenti",
+      "eng": "Presence of pigments",
+      "srd": "Presèntzia de pigmentus"
+    },
+    "pigmentDescTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    }
+  },
+  {
+    "slug": "santandrea_priu",
+    "cardTitle": {
+      "ita": "Necropoli di Sant’Andrea Priu",
+      "eng": "Necropolis of Sant’Andrea Priu",
+      "srd": "Necropoli de Sant’Andrea Priu"
+    },
+    "location": {
+      "ita": "Comune di Bonorva",
+      "eng": "Municipality of Bonorva",
+      "srd": "Comunu de Bonòrva"
+    },
+    "mainTitle": {
+      "ita": "Necropoli di Sant’Andrea Priu",
+      "eng": "Necropolis of Sant’Andrea Priu",
+      "srd": "Necropoli de Sant’Andrea Priu"
+    },
+    "descTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    },
+    "description": {
+      "ita": "Una delle necropoli più monumentali della Sardegna, con domus de janas di grandi dimensioni e ambienti riccamente decorati.",
+      "eng": "One of the most monumental necropolises in Sardinia, with large domus de janas and richly decorated interiors.",
+      "srd": "Una de is necropolis prus monumentalis de sa Sardigna, cun domus de janas mannas e ambientis riccamenti decorados."
+    },
+    "pigmentTitle": {
+      "ita": "Pigmenti",
+      "eng": "Pigments",
+      "srd": "Pigmentus"
+    },
+    "pigmentInfoTitle": {
+      "ita": "Presenza di pigmenti",
+      "eng": "Presence of pigments",
+      "srd": "Presèntzia de pigmentus"
+    },
+    "pigmentDescTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    }
+  },
+  {
+    "slug": "sa_pala_larga",
+    "cardTitle": {
+      "ita": "Necropoli di Sa Pala Larga",
+      "eng": "Necropolis of Sa Pala Larga",
+      "srd": "Necropoli de Sa Pala Larga"
+    },
+    "location": {
+      "ita": "Comune di Bonorva",
+      "eng": "Municipality of Bonorva",
+      "srd": "Comunu de Bonòrva"
+    },
+    "mainTitle": {
+      "ita": "Necropoli di Sa Pala Larga",
+      "eng": "Necropolis of Sa Pala Larga",
+      "srd": "Necropoli de Sa Pala Larga"
+    },
+    "descTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    },
+    "description": {
+      "ita": "Ampie camere funerarie scavate nella roccia basaltica, con tracce di pitture parietali e incisioni simboliche.",
+      "eng": "Large funerary chambers carved into basalt rock, with traces of wall paintings and symbolic carvings.",
+      "srd": "Ampias càmaras funeràrias iscavadas in sa roccia basàltica, cun tràtzas de pintùras parietalis e intzisionis simbolicas."
+    },
+    "pigmentTitle": {
+      "ita": "Pigmenti",
+      "eng": "Pigments",
+      "srd": "Pigmentus"
+    },
+    "pigmentInfoTitle": {
+      "ita": "Presenza di pigmenti",
+      "eng": "Presence of pigments",
+      "srd": "Presèntzia de pigmentus"
+    },
+    "pigmentDescTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    }
+  },
+  {
+    "slug": "sos_forrighesos",
+    "cardTitle": {
+      "ita": "Necropoli di Sos Furrighesos",
+      "eng": "Necropolis of Sos Furrighesos",
+      "srd": "Necropoli de Sos Furrighesos"
+    },
+    "location": {
+      "ita": "Comune di Anela",
+      "eng": "Municipality of Anela",
+      "srd": "Comunu de Anèla"
+    },
+    "mainTitle": {
+      "ita": "Necropoli di Sos Furrighesos",
+      "eng": "Necropolis of Sos Furrighesos",
+      "srd": "Necropoli de Sos Furrighesos"
+    },
+    "descTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    },
+    "description": {
+      "ita": "Sette domus de janas ornate da incisioni rupestri, immerse nei boschi di Anela, testimoni di antichi culti funerari.",
+      "eng": "Seven domus de janas adorned with rock carvings, nestled in the woods of Anela, witnesses of ancient funeral cults.",
+      "srd": "Sette domus de janas ornadas de intzisionis rupèstris, in mesu de is boschis de Anèla, testimònius de antigos cultus funeràrius."
+    },
+    "pigmentTitle": {
+      "ita": "Pigmenti",
+      "eng": "Pigments",
+      "srd": "Pigmentus"
+    },
+    "pigmentInfoTitle": {
+      "ita": "Presenza di pigmenti",
+      "eng": "Presence of pigments",
+      "srd": "Presèntzia de pigmentus"
+    },
+    "pigmentDescTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    }
+  },
+  {
+    "slug": "iloi_ispiluncas",
+    "cardTitle": {
+      "ita": "Necropoli di Iloi – Ispiluncas",
+      "eng": "Necropolis of Iloi / Ispiluncas",
+      "srd": "Necropoli de Iloi / Ispiluncas"
+    },
+    "location": {
+      "ita": "Comune di Sedilo",
+      "eng": "Municipality of Sedilo",
+      "srd": "Comunu de Sèdilo"
+    },
+    "mainTitle": {
+      "ita": "Necropoli di Iloi – Ispiluncas",
+      "eng": "Necropolis of Iloi / Ispiluncas",
+      "srd": "Necropoli de Iloi / Ispiluncas"
+    },
+    "descTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    },
+    "description": {
+      "ita": "Tombe ipogeiche scavate nella roccia calcarea con decorazioni simboliche, testimoni della spiritualità delle comunità prenuragiche.",
+      "eng": "Hypogeic tombs carved into limestone rock with symbolic decorations, witnesses to the spirituality of pre‑Nuragic communities.",
+      "srd": "Tombas ipogeicas iscavadas in sa roccia calcària cun decoratzionis simbolicas, testimònius de sa spiritualidade de is comunitas prenuràgicas."
+    },
+    "pigmentTitle": {
+      "ita": "Pigmenti",
+      "eng": "Pigments",
+      "srd": "Pigmentus"
+    },
+    "pigmentInfoTitle": {
+      "ita": "Presenza di pigmenti",
+      "eng": "Presence of pigments",
+      "srd": "Presèntzia de pigmentus"
+    },
+    "pigmentDescTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    }
+  },
+  {
+    "slug": "mandras",
+    "cardTitle": {
+      "ita": "Necropoli di Mandras o Mrandas",
+      "eng": "Necropolis of Mandras or Mrandas",
+      "srd": "Necropoli de Mandras / Mrandas"
+    },
+    "location": {
+      "ita": "Comune di Ardauli",
+      "eng": "Municipality of Ardauli",
+      "srd": "Comunu de Ardaùli"
+    },
+    "mainTitle": {
+      "ita": "Necropoli di Mandras o Mrandas",
+      "eng": "Necropolis of Mandras or Mrandas",
+      "srd": "Necropoli de Mandras / Mrandas"
+    },
+    "descTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    },
+    "description": {
+      "ita": "Tombe ipogeiche scavate nella roccia durante il Neolitico, con camere funerarie che testimoniano antichi rituali collettivi.",
+      "eng": "Hypogeic tombs carved into the rock during the Neolithic, with funerary chambers that testify to ancient collective rituals.",
+      "srd": "Tombas ipogeicas iscavadas in sa roccia in tempus neòliticu, cun càmaras funeràrias chi testimoniant antigos ritualis collettivos."
+    },
+    "pigmentTitle": {
+      "ita": "Pigmenti",
+      "eng": "Pigments",
+      "srd": "Pigmentus"
+    },
+    "pigmentInfoTitle": {
+      "ita": "Presenza di pigmenti",
+      "eng": "Presence of pigments",
+      "srd": "Presèntzia de pigmentus"
+    },
+    "pigmentDescTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    }
+  },
+  {
+    "slug": "brodu",
+    "cardTitle": {
+      "ita": "Necropoli di Brodu",
+      "eng": "Necropolis of Brodu",
+      "srd": "Necropoli de Brodu"
+    },
+    "location": {
+      "ita": "Comune di Oniferi",
+      "eng": "Municipality of Oniferi",
+      "srd": "Comunu de Onìferi"
+    },
+    "mainTitle": {
+      "ita": "Necropoli di Brodu",
+      "eng": "Necropolis of Brodu",
+      "srd": "Necropoli de Brodu"
+    },
+    "descTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    },
+    "description": {
+      "ita": "Complesso funerario prenuragico con domus de janas usate come sepolture collettive durante il Neolitico.",
+      "eng": "Pre‑Nuragic funerary complex with domus de janas used as collective burials during the Neolithic.",
+      "srd": "Cumplessu funeràriu prenuràgicu cun domus de janas utilizadas comente sepolturas collettivas in su Neolìticu."
+    },
+    "pigmentTitle": {
+      "ita": "Pigmenti",
+      "eng": "Pigments",
+      "srd": "Pigmentus"
+    },
+    "pigmentInfoTitle": {
+      "ita": "Presenza di pigmenti",
+      "eng": "Presence of pigments",
+      "srd": "Presèntzia de pigmentus"
+    },
+    "pigmentDescTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    }
+  },
+  {
+    "slug": "istevene",
+    "cardTitle": {
+      "ita": "Necropoli di Istevéne",
+      "eng": "Necropolis of Istevéne",
+      "srd": "Necropoli de Istevéne"
+    },
+    "location": {
+      "ita": "Comune di Mamoiada",
+      "eng": "Municipality of Mamoiada",
+      "srd": "Comunu de Mamoiàda"
+    },
+    "mainTitle": {
+      "ita": "Necropoli di Istevéne",
+      "eng": "Necropolis of Istevéne",
+      "srd": "Necropoli de Istevéne"
+    },
+    "descTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    },
+    "description": {
+      "ita": "Tombe ipogeiche con decorazioni simboliche scolpite nella roccia, legate ai culti funerari prenuragici.",
+      "eng": "Hypogeic tombs with symbolic decorations carved into the rock, linked to pre‑Nuragic funeral cults.",
+      "srd": "Tombas ipogeicas cun decoratzionis simbolicas iscolpidas in sa roccia, ligadas a is cultus funeràrius prenuràgicos."
+    },
+    "pigmentTitle": {
+      "ita": "Pigmenti",
+      "eng": "Pigments",
+      "srd": "Pigmentus"
+    },
+    "pigmentInfoTitle": {
+      "ita": "Presenza di pigmenti",
+      "eng": "Presence of pigments",
+      "srd": "Presèntzia de pigmentus"
+    },
+    "pigmentDescTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    }
+  },
+  {
+    "slug": "pranu_mutteddu",
+    "cardTitle": {
+      "ita": "Parco Archeologico di Pranu Mutteddu",
+      "eng": "Pranu Mutteddu Archaeological Park",
+      "srd": "Parcu Arqueòlogicu de Pranu Mutteddu"
+    },
+    "location": {
+      "ita": "Comune di Goni",
+      "eng": "Municipality of Goni",
+      "srd": "Comunu de Goni"
+    },
+    "mainTitle": {
+      "ita": "Parco Archeologico di Pranu Mutteddu",
+      "eng": "Pranu Mutteddu Archaeological Park",
+      "srd": "Parcu Arqueòlogicu de Pranu Mutteddu"
+    },
+    "descTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    },
+    "description": {
+      "ita": "Uno dei più vasti complessi megalitici della Sardegna, con menhir allineati e tombe preistoriche immerse nella macchia mediterranea.",
+      "eng": "One of the largest megalithic complexes in Sardinia, with aligned menhirs and prehistoric graves immersed in Mediterranean scrub.",
+      "srd": "Unu de is cumprèssus megalìticos prus mannus de sa Sardigna, cun menhir allineaus e tombas preistòricas in mesu de sa macchia mediterrània."
+    },
+    "pigmentTitle": {
+      "ita": "Pigmenti",
+      "eng": "Pigments",
+      "srd": "Pigmentus"
+    },
+    "pigmentInfoTitle": {
+      "ita": "Presenza di pigmenti",
+      "eng": "Presence of pigments",
+      "srd": "Presèntzia de pigmentus"
+    },
+    "pigmentDescTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    }
+  },
+  {
+    "slug": "montessu",
+    "cardTitle": {
+      "ita": "Necropoli di Montessu",
+      "eng": "Necropolis of Montessu",
+      "srd": "Necropoli de Montessu"
+    },
+    "location": {
+      "ita": "Comune di Villaperuccio",
+      "eng": "Municipality of Villaperuccio",
+      "srd": "Comunu de Biddaperùcciu"
+    },
+    "mainTitle": {
+      "ita": "Necropoli di Montessu",
+      "eng": "Necropolis of Montessu",
+      "srd": "Necropoli de Montessu"
+    },
+    "descTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    },
+    "description": {
+      "ita": "Una delle più estese necropoli della Sardegna, con domus de janas scavate nella roccia e decorazioni simboliche legate ai culti funerari.",
+      "eng": "One of the most extensive necropolises in Sardinia, with domus de janas carved into the rock and symbolic decorations related to funeral cults.",
+      "srd": "Una de is necropolis prus istesas de sa Sardigna, cun domus de janas iscavadas in sa roccia e decoratzionis simbolicas ligadas a is cultus funeràrius."
+    },
+    "pigmentTitle": {
+      "ita": "Pigmenti",
+      "eng": "Pigments",
+      "srd": "Pigmentus"
+    },
+    "pigmentInfoTitle": {
+      "ita": "Presenza di pigmenti",
+      "eng": "Presence of pigments",
+      "srd": "Presèntzia de pigmentus"
+    },
+    "pigmentDescTitle": {
+      "ita": "Descrizione",
+      "eng": "Description",
+      "srd": "Descritzioni"
+    }
+  }
+]

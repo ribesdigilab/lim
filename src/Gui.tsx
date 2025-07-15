@@ -32,9 +32,9 @@ export function PigmentSelector({ test, pigments, currentColor, onSelect, onRese
     <div className="flex flex-col relative h-full w-full pointer-events-none">
       {/* Pigment selection panel */}
       <div
-        className="absolute top-0 mt-[12rem] right-0 m-4 p-4 shadow-lg rounded-3xl backdrop-blur-sm pointer-events-auto z-50"
+        className="absolute top-0 mt-[12rem] right-0 m-4 p-4 shadow-lg backdrop-blur-sm pointer-events-auto z-50"
         style={{
-          backgroundImage: "url('/Rectangle 1.png')",
+          backgroundImage: "url('/Rectangle vert.png')",
           backgroundSize: '100% 100%',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',

@@ -11,7 +11,7 @@ export function SymbolPanel({ symbols, onSelect }: SymbolProps) {
       <div
         className="shadow-lg rounded-md p-4 backdrop-blur-sm h-[20rem] w-[6rem]"
         style={{
-          backgroundImage: "url('/Rectangle 1.png')",
+          backgroundImage: "url('/Rectangle vert.png')",
           backgroundSize: '100% 100%',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
