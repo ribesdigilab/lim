@@ -32,7 +32,7 @@ export function PigmentSelector({ test, pigments, currentColor, onSelect, onRese
     <div className="flex flex-col relative h-full w-full pointer-events-none">
       {/* Pigment selection panel */}
       <div
-        className="absolute top-0 mt-[12rem] right-0 m-4 p-4 shadow-lg backdrop-blur-sm pointer-events-auto z-50"
+        className="absolute top-[15rem] right-0 m-4 w-[14rem] h-[30rem] p-6 shadow-lg backdrop-blur-sm pointer-events-auto z-50"
         style={{
           backgroundImage: "url('/Rectangle vert.png')",
           backgroundSize: '100% 100%',
@@ -43,10 +43,10 @@ export function PigmentSelector({ test, pigments, currentColor, onSelect, onRese
           {pigments.map((p, idx) => (
             <div
               key={p.value}
-              className="flex items-center rounded-2xl border border-white/40 px-[1px] py-[1px] pointer-events-auto">
+              className="flex w-full items-center justify-between rounded-2xl border border-white/40 px-[1px] py-[1px] pointer-events-auto">
               <button
                 onClick={() => onSelect(p.value)}
-                className="w-24 h-10 rounded-xl pointer-events-auto"
+                className="w-32 h-12 rounded-xl pointer-events-auto"
                 style={{
                   backgroundImage: `linear-gradient(${p.value}, ${p.value}), url('/textr.png')`,
                   backgroundBlendMode: 'multiply',

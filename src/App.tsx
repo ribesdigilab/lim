@@ -8,6 +8,7 @@ import { DrawingCanvas, DrawingCanvasHandle } from './DrawingCanvas';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPanel } from './MapPanel';
 import { SymbolPanel } from './Symbol';
+import { PanelInfo } from './PanelInfo';
 // Mappa simboli per ogni tempio (espandibile)
 const symbolsByTemple: Record<string, string[]> = {
   Istevéne: ['/simbolo0.png'],
@@ -45,7 +46,7 @@ export default function App() {
       <div className="w-screen h-screen bg-black flex items-center justify-center">
         <button
           onClick={() => setShowStartScreen(false)}
-          className="text-white px-8 py-4 text-2xl rounded transition"
+          className="text-white w-auto h-[15rem] px-14 py-6 text-3xl transition uppercase"
           style={{
             backgroundImage: "url('/Rectangle 1.png')",
             backgroundSize: '100% 100%',
@@ -54,7 +55,7 @@ export default function App() {
           }}
         >
           {t('Il muro dei pigmenti')}<br/>
-          <div className="text-sm mt-6">{t('Tocca per continuare')}</div>
+          <div className="text-sm mt-12">{t('Tocca per continuare')}</div>
         </button>
       </div>
     );
@@ -88,7 +89,7 @@ export default function App() {
             <button className="bg-gray-700 text-white px-6 py-3 rounded opacity-50 cursor-not-allowed">Domus 4</button>
           </div>
         </div>
-        {/* Back to Start */}
+        
         <button
           onClick={() => setShowStartScreen(true)}
           className="absolute left-6 bottom-10 w-[5rem] h-[5rem] z-50"
@@ -109,7 +110,6 @@ export default function App() {
     return (
       <div className="w-screen h-screen bg-black flex flex-col items-center justify-center ">
         <LanguageSelector />
-        {/* Symbol panel */}
         <SymbolPanel
   symbols={symbolsByTemple[selectedTemple] || []}
   onSelect={sym => {
@@ -118,7 +118,7 @@ export default function App() {
   }}
 />
       <MapPanel selectedTemple={selectedTemple!} />
-        {/* Back to Domus */}
+        
         <button
           onClick={handleTempleBack}
           className="absolute left-8 bottom-6 w-[5rem] h-[5rem] z-50"
@@ -129,13 +129,7 @@ export default function App() {
             backgroundRepeat: 'no-repeat',
           }}
         />
-         <PigmentSelector
-        test={t('language')}
-        pigments={pigments}
-        currentColor={color}
-        onSelect={setColor}
-        onReset={handleReset}
-      />
+         <PanelInfo selectedTemple={selectedTemple!} />
       </div>
     );
   }

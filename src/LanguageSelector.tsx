@@ -6,13 +6,13 @@ export function LanguageSelector() {
   const { i18n } = useTranslation();
 
   return (
-    <div className="absolute bottom-0 right-0 m-4 mb-6 p-4 w-[10rem] shadow-lg rounded-sm shadow-lg backdrop-blur-sm pointer-events-auto z-50" 
-    style={{ backgroundImage: "url('/Rectangle 1.png')", 
+    <div className="absolute bottom-0 right-0 m-4 mb-6 p-4 w-[14rem] shadow-lg rounded-sm shadow-lg backdrop-blur-sm pointer-events-auto z-50" 
+    style={{ backgroundImage: "url('/Rectangle l.png')", 
     backgroundSize: '100% 100%',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat'
     }}>
-      <div className="flex space-x-4 ">
+      <div className="flex items-center justify-center space-x-8">
             <button onClick={() => i18n.changeLanguage('sc')} title="Sardu">
               <svg className="w-8 h-6" viewBox="0 0 4 3">
                 <rect width="4" height="3" fill="#fff" />

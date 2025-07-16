@@ -16,7 +16,7 @@ export function MapPanel({ selectedTemple }: MapPanelProps) {
 
   return (
     <div
-      className="absolute top-0 right-0 m-4 p-4 w-44 h-40 z-50 shadow-lg rounded-sm backdrop-blur-sm"
+      className="absolute top-0 right-0 m-4 p-6 w-[14rem] h-[14rem] z-50 shadow-lg rounded-sm backdrop-blur-sm"
       style={{
         backgroundImage: "url('/Rectangle 1.png')",
         backgroundSize: '100% 100%',
