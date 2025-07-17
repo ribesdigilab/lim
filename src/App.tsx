@@ -76,23 +76,31 @@ export default function App() {
           }}
         >
           <h1 className="text-white text-4xl font-bold text-center">{t('Scegli la Domus')}</h1>
-          <div className="flex space-x-4">
-            <button
-              className="bg-white text-black px-6 py-3 rounded"
-              onClick={() => setSelectedTemple('Istevéne')}
-            >Istevéne</button>
-            <button
-              className="bg-white text-black px-6 py-3 rounded"
-              onClick={() => setSelectedTemple('Montessu')}
-            >Montessu</button>
-            <button className="bg-gray-700 text-white px-6 py-3 rounded opacity-50 cursor-not-allowed">Domus 3</button>
-            <button className="bg-gray-700 text-white px-6 py-3 rounded opacity-50 cursor-not-allowed">Domus 4</button>
+          <div className=" grid grid-cols-5 gap-x-4 gap-y-4">
+            
+            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md" style={{ backgroundImage: "url('/bottoni/anghelu_ruju.webp')" }} onClick={() => setSelectedTemple('anghelu_ruju')}>Anghelu Ruju</button>
+            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md" style={{ backgroundImage: "url('/bottoni/puttu_codinu.webp')" }} onClick={() => setSelectedTemple('puttu_codinu')}>Puttu Codinu</button>
+            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md" style={{ backgroundImage: "url('/bottoni/monte_siseri.webp')" }} onClick={() => setSelectedTemple('monte_siseri')}>Monte Siseri / S’Incantu</button>
+            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md" style={{ backgroundImage: "url('/bottoni/mesu_e_montes.webp')" }} onClick={() => setSelectedTemple('mesu_e_montes')}>Mesu ’e Montes</button>
+            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md" style={{ backgroundImage: "url('/bottoni/su_crucifissu_mannu.webp')" }} onClick={() => setSelectedTemple('su_crucifissu_mannu')}>Su Crucifissu Mannu</button>
+            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md" style={{ backgroundImage: "url('/bottoni/orto_beneficio.webp')" }} onClick={() => setSelectedTemple('orto_beneficio')}>Orto del Beneficio</button>
+            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md" style={{ backgroundImage: "url('/bottoni/roccia_elefante.webp')" }} onClick={() => setSelectedTemple('roccia_elefante')}>Roccia dell’Elefante</button>
+            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md" style={{ backgroundImage: "url('/bottoni/parco_petroglifi.webp')" }} onClick={() => setSelectedTemple('parco_petroglifi')}>Parco dei Petroglifi</button>
+            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md" style={{ backgroundImage: "url('/bottoni/santandrea_priu.webp')" }} onClick={() => setSelectedTemple('santandrea_priu')}>Sant’Andrea Priu</button>
+            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md" style={{ backgroundImage: "url('/bottoni/sa_pala_larga.webp')" }} onClick={() => setSelectedTemple('sa_pala_larga')}>Sa Pala Larga</button>
+            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md" style={{ backgroundImage: "url('/bottoni/sos_furrighesos.webp')" }} onClick={() => setSelectedTemple('sos_forrighesos')}>Sos Furrighesos</button>
+            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md" style={{ backgroundImage: "url('/bottoni/iloi_ispiluncas.webp')" }} onClick={() => setSelectedTemple('iloi_ispiluncas')}>Iloi – Ispiluncas</button>
+            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md" style={{ backgroundImage: "url('/bottoni/mandras.webp')" }} onClick={() => setSelectedTemple('mandras')}>Mandras o Mrandas</button>
+            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md" style={{ backgroundImage: "url('/bottoni/brodu.webp')" }} onClick={() => setSelectedTemple('brodu')}>Brodu</button>
+            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md" style={{ backgroundImage: "url('/bottoni/istevene.webp')" }} onClick={() => setSelectedTemple('istevéne')}>Istevéne</button>
+            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md" style={{ backgroundImage: "url('/bottoni/pranu_mutteddu.webp')" }} onClick={() => setSelectedTemple('pranu_mutteddu')}>Pranu Mutteddu</button>
+            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md" style={{ backgroundImage: "url('/bottoni/montessu.webp')" }} onClick={() => setSelectedTemple('montessu')}>Montessu</button>
           </div>
         </div>
         
         <button
           onClick={() => setShowStartScreen(true)}
-          className="absolute left-6 bottom-10 w-[5rem] h-[5rem] z-50"
+          className="absolute left-8 bottom-6 w-[5rem] h-[5rem] z-50"
           style={{
             backgroundImage: "url('/back.svg')",
             backgroundSize: '100% 100%',
