@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-type Pigment = { name: string; value: string };
+type Pigment = { name: string; value: string; desc: string };
 interface PigmentSelectorProps {
   test: string;
   pigments: Pigment[];
@@ -27,7 +27,7 @@ export function PigmentSelector({ test, pigments, currentColor, onSelect, onRese
       setActiveInfo(pigments[currentIndex + 1].name);
     }
   };
-
+  const pigment = pigments.find(p => p.name === activeInfo); 
   return (
     <div className="flex flex-col relative h-full w-full pointer-events-none">
       {/* Pigment selection panel */}
@@ -96,8 +96,8 @@ export function PigmentSelector({ test, pigments, currentColor, onSelect, onRese
               backgroundPosition: 'top',
               backgroundRepeat: 'no-repeat',
             }}>
-            <h2 className="text-3xl font-bold mb-4 text-center">{t(`pigments.${activeInfo}`)}</h2>
-            <p className="text-lg text-center">{t(`pigments.${activeInfo}`)}</p>
+            <h2 className="text-3xl font-bold mb-4 text-center">{pigment?.name}</h2>
+            <p className="text-lg text-center">{pigment?.desc}</p>
           </div>
 
           <button

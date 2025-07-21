@@ -11,11 +11,26 @@ import { SymbolPanel } from './Symbol';
 import { PanelInfo } from './PanelInfo';
 // Mappa simboli per ogni tempio (espandibile)
 const symbolsByTemple: Record<string, string[]> = {
-  Istevéne: ['/simbolo0.png'],
-  Montessu: ['/simbolo1.png'],
-  domus3: [],
-  domus4: [],
+  istevéne: ['/simbolo0.png'],
+  montessu: ['/simbolo1.png'],
+  anghelu_ruju: [],
+  puttu_codinu: [],
+  monte_siseri: [],
+  brodu: [],
+  iloi_ispiluncas: [],
+  mandras: [],
+  mesu_e_montes: [],
+  orto_beneficio: [],
+  parco_petroglifi: [],
+  pranu_mutteddu: [],
+  roccia_elefante: [],
+  sa_pala_larga: [],
+  santandrea_priu: [],
+  sos_forrighesos: [],
+  su_crucifissu_mannu: [],
 };
+
+
 
 export default function App() {
   const { t } = useTranslation();
@@ -24,13 +39,24 @@ export default function App() {
   const [color, setColor] = useState<string>('#000000');
   const [selectedTemple, setSelectedTemple] = useState<string | null>(null);
   const [selectedSymbol, setSelectedSymbol] = useState<string | null>(null);
-  const pigments = [
-    { name: 'Rosso Scuro', value: '#8b0000' },
-    { name: 'Marrone', value: '#a0522d' },
-    { name: 'Sabbia', value: '#cd853f' },
-    { name: 'Verde Oliva', value: '#556b2f' },
-    { name: 'Nero', value: '#000000' }
-  ];
+
+
+  const pigmentsByTemple: Record<string, { name: string; value: string; desc: string }[]> = {
+    anghelu_ruju: [
+      { name: 'Rosso Scuro', value: '#8b0000', desc: t('anghelu_ruju.rosso.pigmentDescTitle') },
+      { name: 'Marrone', value: '#a0522d', desc: t('anghelu_ruju.marrone.pigmentDescTitle') },
+      { name: 'Nero', value: '#000000', desc: t('anghelu_ruju.nero.pigmentDescTitle') },
+    ],
+    montessu: [
+      { name: 'Sabbia', value: '#cd853f', desc: t('montessu.sabbia.pigmentDescTitle') },
+      { name: 'Verde Oliva', value: '#556b2f', desc: t('montessu.verde.pigmentDescTitle') },
+      { name: 'Nero', value: '#000000', desc: t('montessu.nero.pigmentDescTitle') },
+    ],
+    // Aggiungi altri templi qui
+  };
+
+
+  const pigments = selectedTemple ? pigmentsByTemple[selectedTemple] ?? [] : [];
   const handleReset = () => canvasRef.current?.resetCanvas();
   const handleBack = () => {
     setSelectedSymbol(null);
@@ -173,6 +199,7 @@ export default function App() {
         currentColor={color}
         onSelect={setColor}
         onReset={handleReset}
+       
       />
 
       {/* Canvas fade-in */}

@@ -9,14 +9,9 @@ interface PanelInfoProps {
 export function PanelInfo({ selectedTemple }: PanelInfoProps) {
   const { t } = useTranslation();
 
-  const descriptions: Record<string, string> = {
-    Istevéne:
-      'Istevéne è una Domus de Janas situata nella regione sud-occidentale della Sardegna, famosa per i suoi ambienti scavati nella roccia e decorati con simboli misteriosi.',
-    Montessu:
-      'Montessu è uno dei più grandi complessi di Domus de Janas della Sardegna, con numerose tombe distribuite lungo un anfiteatro naturale nella roccia trachitica.',
-  };
+  const description = t(`${selectedTemple}.description`)|| 'Informazioni non disponibili per questa Domus.';
 
-  const content = descriptions[selectedTemple] || 'Informazioni non disponibili per questa Domus.';
+
 
   return (
     <div
@@ -29,7 +24,7 @@ export function PanelInfo({ selectedTemple }: PanelInfoProps) {
       }}
     >
       <div className="text-white m-2 text-sm leading-relaxed whitespace-pre-wrap">
-        {content}
+        {description}
       </div>
     </div>
   );
