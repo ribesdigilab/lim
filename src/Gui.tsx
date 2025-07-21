@@ -65,8 +65,13 @@ export function PigmentSelector({ test, pigments, currentColor, onSelect, onRese
 
           <button
             onClick={onReset}
-            className="text-white/90 bg-red-600 font-bold py-2 px-4 rounded-xl mt-2 pointer-events-auto">
-            {t('actions.reset')}
+            className="absolute bottom-4 w-[4rem] h-[4rem] m-14 mt-2 pointer-events-auto"style={{
+            backgroundImage: "url('/reset.svg')",
+            backgroundSize: '100% 100%',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}>
+            
           </button>
         </div>
       </div>

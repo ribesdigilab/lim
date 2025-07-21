@@ -47,6 +47,11 @@ export default function App() {
       { name: 'Marrone', value: '#a0522d', desc: t('anghelu_ruju.marrone.pigmentDescTitle') },
       { name: 'Nero', value: '#000000', desc: t('anghelu_ruju.nero.pigmentDescTitle') },
     ],
+    istevéne: [
+      { name: 'Rosso Scuro', value: '#8b0000', desc: t('anghelu_ruju.rosso.pigmentDescTitle') },
+      { name: 'Marrone', value: '#a0522d', desc: t('anghelu_ruju.marrone.pigmentDescTitle') },
+      { name: 'Nero', value: '#000000', desc: t('anghelu_ruju.nero.pigmentDescTitle') },
+    ],
     montessu: [
       { name: 'Sabbia', value: '#cd853f', desc: t('montessu.sabbia.pigmentDescTitle') },
       { name: 'Verde Oliva', value: '#556b2f', desc: t('montessu.verde.pigmentDescTitle') },
