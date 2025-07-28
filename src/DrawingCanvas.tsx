@@ -24,15 +24,39 @@ function DrawingCanvas({ test, currentColor, pngImage }: DrawingCanvasProps, ref
   const raycaster = new THREE.Raycaster();
   const pointer = new THREE.Vector2();
   const drawMeshRef = useRef<THREE.Mesh | null>(null);
-
+  const maskCanvasRef = useRef<HTMLCanvasElement | null>(null);
+  const maskCtxRef = useRef<CanvasRenderingContext2D | null>(null);
   useImperativeHandle(ref, () => ({
       resetCanvas: () => {
         if (offCanvasRef.current && drawCtxRef.current && drawTextureRef.current) {
-          drawCtxRef.current.clearRect(0, 0, offCanvasRef.current.width, offCanvasRef.current.height);
-          drawTextureRef.current.needsUpdate = true;
-        }
-      },
+      drawCtxRef.current.clearRect(0, 0, offCanvasRef.current.width, offCanvasRef.current.height);
+      drawTextureRef.current.needsUpdate = true;
+    }
+  },
+  getCompletion: () => computeCoverage(),
     }));
+  function computeCoverage(): number {
+  const drawCtx = drawCtxRef.current;
+  const maskCtx = maskCtxRef.current;
+  if (!drawCtx || !maskCtx) return 0;
+
+  const drawData = drawCtx.getImageData(0, 0, 4096, 4096).data;
+  const maskData = maskCtx.getImageData(0, 0, 4096, 4096).data;
+
+  let total = 0;
+  let covered = 0;
+
+  for (let i = 0; i < maskData.length; i += 4) {
+    const maskAlpha = maskData[i + 3];
+    if (maskAlpha > 128) {
+      total++;
+      const drawAlpha = drawData[i + 3];
+      if (drawAlpha > 128) covered++;
+    }
+  }
+
+  return total > 0 ? covered / total : 0;
+}
 
   useEffect(() => {
     currentColorRef.current = currentColor;
@@ -79,6 +103,16 @@ function DrawingCanvas({ test, currentColor, pngImage }: DrawingCanvasProps, ref
     if (!ctx) return;
     ctx.clearRect(0, 0, offCanvas.width, offCanvas.height);
     drawCtxRef.current = ctx;
+
+    const maskCanvas = document.createElement('canvas');
+    maskCanvas.width = maskCanvas.height = 4096;
+    const maskCtx = maskCanvas.getContext('2d')!;
+    const img = new Image();
+    img.crossOrigin = 'anonymous'; // utile se il PNG viene da altra origine
+    img.src = pngImage;
+    img.onload = () => {
+      maskCtx.drawImage(img, 0, 0, 4096, 4096);
+    };
 
     const drawTexture = new THREE.CanvasTexture(offCanvas);
     drawTexture.minFilter = THREE.LinearFilter;
@@ -174,8 +208,18 @@ function DrawingCanvas({ test, currentColor, pngImage }: DrawingCanvasProps, ref
       if (offCanvasRef.current && document.body.contains(offCanvasRef.current)) {
         document.body.removeChild(offCanvasRef.current);
       }
+      if (maskCanvasRef.current && document.body.contains(maskCanvasRef.current)) {
+        document.body.removeChild(maskCanvasRef.current);
+}
     };
   }, [test, pngImage]);
 
   return <div ref={mountRef} className="w-full h-full fixed top-0 left-0 z-0" />;
 });
+
+
+
+//const completion = drawingCanvasRef.current?.getCompletion();
+//if (completion >= 0.95) {
+//  console.log('Completato!');
+//
