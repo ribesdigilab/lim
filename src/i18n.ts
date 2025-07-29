@@ -6,7 +6,7 @@ const resources = {
     translation: {
       
       anghelu_ruju: {
-        cardTitle: "Necropoli di Anghelu Ruju",
+        cardTitle: "Anghelu Ruju",
         location: "Comune di Alghero",
         mainTitle: "Necropoli di Anghelu Ruju",
         descTitle: "Descrizione",
@@ -38,7 +38,7 @@ const resources = {
         },
       },
       puttu_codinu: {
-        cardTitle: "Necropoli di Puttu Codinu",
+        cardTitle: "Puttu Codinu",
         location: "Comune di Villanova Monteleone",
         mainTitle: "Necropoli di Puttu Codinu",
         descTitle: "Descrizione",
@@ -70,7 +70,7 @@ const resources = {
         },
       },
       monte_siseri: {
-        cardTitle: "Necropoli di Monte Siseri / S’Incantu",
+        cardTitle: "S’Incantu",
         location: "Comune di Putifigari",
         mainTitle: "Necropoli di Monte Siseri / S’Incantu",
         descTitle: "Descrizione",
@@ -102,7 +102,7 @@ const resources = {
         },
       },
       mesu_e_montes: {
-        cardTitle: "Necropoli di Mesu ’e Montes",
+        cardTitle: "Mesu ’e Montes",
         location: "Comune di Ossi",
         mainTitle: "Necropoli di Mesu ’e Montes",
         descTitle: "Descrizione",
@@ -134,7 +134,7 @@ const resources = {
         },
       },
       su_crucifissu_mannu: {
-        cardTitle: "Necropoli di Su Crucifissu Mannu",
+        cardTitle: "Su Crucifissu Mannu",
         location: "Comune di Porto Torres",
         mainTitle: "Necropoli di Su Crucifissu Mannu",
         descTitle: "Descrizione",
@@ -166,7 +166,7 @@ const resources = {
         },
       },
       orto_beneficio: {
-        cardTitle: "Domus de janas dell’Orto del Beneficio Parrocchiale",
+        cardTitle: "Orto del Beneficio Parrocchiale",
         location: "Comune di Sennori",
         mainTitle: "Domus de janas dell’Orto del Beneficio Parrocchiale",
         descTitle: "Descrizione",
@@ -198,7 +198,7 @@ const resources = {
         },
       },
       roccia_elefante: {
-        cardTitle: "Domus de janas della Roccia dell’Elefante",
+        cardTitle: "Roccia dell’Elefante",
         location: "Comune di Castelsardo",
         mainTitle: "Domus de janas della Roccia dell’Elefante",
         descTitle: "Descrizione",
@@ -262,7 +262,7 @@ const resources = {
         },
       },
       santandrea_priu: {
-        cardTitle: "Necropoli di Sant’Andrea Priu",
+        cardTitle: "Sant’Andrea Priu",
         location: "Comune di Bonorva",
         mainTitle: "Necropoli di Sant’Andrea Priu",
         descTitle: "Descrizione",
@@ -294,7 +294,7 @@ const resources = {
         },
       },
       sa_pala_larga: {
-        cardTitle: "Necropoli di Sa Pala Larga",
+        cardTitle: "Sa Pala Larga",
         location: "Comune di Bonorva",
         mainTitle: "Necropoli di Sa Pala Larga",
         descTitle: "Descrizione",
@@ -326,7 +326,7 @@ const resources = {
         },
       },
       sos_forrighesos: {
-        cardTitle: "Necropoli di Sos Furrighesos",
+        cardTitle: "Sos Furrighesos",
         location: "Comune di Anela",
         mainTitle: "Necropoli di Sos Furrighesos",
         descTitle: "Descrizione",
@@ -358,7 +358,7 @@ const resources = {
         },
       },
       iloi_ispiluncas: {
-        cardTitle: "Necropoli di Iloi – Ispiluncas",
+        cardTitle: "Iloi – Ispiluncas",
         location: "Comune di Sedilo",
         mainTitle: "Necropoli di Iloi – Ispiluncas",
         descTitle: "Descrizione",
@@ -390,7 +390,7 @@ const resources = {
         },
       },
       mandras: {
-        cardTitle: "Necropoli di Mandras o Mrandas",
+        cardTitle: "Mandras",
         location: "Comune di Ardauli",
         mainTitle: "Necropoli di Mandras o Mrandas",
         descTitle: "Descrizione",
@@ -422,7 +422,7 @@ const resources = {
         },
       },
       brodu: {
-        cardTitle: "Necropoli di Brodu",
+        cardTitle: "Brodu",
         location: "Comune di Oniferi",
         mainTitle: "Necropoli di Brodu",
         descTitle: "Descrizione",
@@ -454,7 +454,7 @@ const resources = {
         },
       },
       istevéne: {
-        cardTitle: "Necropoli di Istevéne",
+        cardTitle: "Istevéne",
         location: "Comune di Mamoiada",
         mainTitle: "Necropoli di Istevéne",
         descTitle: "Descrizione",
@@ -486,7 +486,7 @@ const resources = {
         },
       },
       pranu_mutteddu: {
-        cardTitle: "Parco Archeologico di Pranu Mutteddu",
+        cardTitle: "Pranu Mutteddu",
         location: "Comune di Goni",
         mainTitle: "Parco Archeologico di Pranu Mutteddu",
         descTitle: "Descrizione",
@@ -518,7 +518,7 @@ const resources = {
         },
       },
       montessu: {
-        cardTitle: "Necropoli di Montessu",
+        cardTitle: "Montessu",
         location: "Comune di Villaperuccio",
         mainTitle: "Necropoli di Montessu",
         descTitle: "Descrizione",
@@ -556,7 +556,7 @@ const resources = {
   en: {
     translation: {
       anghelu_ruju: {
-      cardTitle: "Necropolis of Anghelu Ruju",
+      cardTitle: "Anghelu Ruju",
       location: "Municipality of Alghero",
       mainTitle: "Necropolis of Anghelu Ruju",
       descTitle: "Description",
@@ -589,7 +589,7 @@ const resources = {
 
     },
     puttu_codinu: {
-      cardTitle: "Necropolis of Puttu Codinu",
+      cardTitle: "Puttu Codinu",
       location: "Municipality of Villanova Monteleone",
       mainTitle: "Necropolis of Puttu Codinu",
       descTitle: "Description",
@@ -621,7 +621,7 @@ const resources = {
       },
     },
     monte_siseri: {
-      cardTitle: "Necropolis of Monte Siseri / S’Incantu",
+      cardTitle: "S’Incantu",
       location: "Municipality of Putifigari",
       mainTitle: "Necropolis of Monte Siseri / S’Incantu",
       descTitle: "Description",
@@ -653,7 +653,7 @@ const resources = {
       },
     },
     mesu_e_montes: {
-      cardTitle: "Necropolis of Mesu ’e Montes",
+      cardTitle: "Mesu ’e Montes",
       location: "Municipality of Ossi",
       mainTitle: "Necropolis of Mesu ’e Montes",
       descTitle: "Description",
@@ -685,7 +685,7 @@ const resources = {
       },
     },
     su_crucifissu_mannu: {
-      cardTitle: "Necropolis of Su Crucifissu Mannu",
+      cardTitle: "Su Crucifissu Mannu",
       location: "Municipality of Porto Torres",
       mainTitle: "Necropolis of Su Crucifissu Mannu",
       descTitle: "Description",
@@ -717,7 +717,7 @@ const resources = {
       },
     },
     orto_beneficio: {
-      cardTitle: "Domus de Janas of the Parish Benefice Garden",
+      cardTitle: "Parish Benefice Garden",
       location: "Municipality of Sennori",
       mainTitle: "Domus de Janas of the Parish Benefice Garden",
       descTitle: "Description",
@@ -749,7 +749,7 @@ const resources = {
       },
     },
     roccia_elefante: {
-      cardTitle: "Domus de Janas of Elephant Rock",
+      cardTitle: "Elephant Rock",
       location: "Municipality of Castelsardo",
       mainTitle: "Domus de Janas of Elephant Rock",
       descTitle: "Description",
@@ -813,7 +813,7 @@ const resources = {
       },
     },
     santandrea_priu: {
-      cardTitle: "Necropolis of Sant’Andrea Priu",
+      cardTitle: "Sant’Andrea Priu",
       location: "Municipality of Bonorva",
       mainTitle: "Necropolis of Sant’Andrea Priu",
       descTitle: "Description",
@@ -845,7 +845,7 @@ const resources = {
       },
     },
     sa_pala_larga: {
-      cardTitle: "Necropolis of Sa Pala Larga",
+      cardTitle: "Sa Pala Larga",
       location: "Municipality of Bonorva",
       mainTitle: "Necropolis of Sa Pala Larga",
       descTitle: "Description",
@@ -877,7 +877,7 @@ const resources = {
       },
     },
     sos_forrighesos: {
-      cardTitle: "Necropolis of Sos Furrighesos",
+      cardTitle: " Sos Furrighesos",
       location: "Municipality of Anela",
       mainTitle: "Necropolis of Sos Furrighesos",
       descTitle: "Description",
@@ -909,7 +909,7 @@ const resources = {
       },
     },
     iloi_ispiluncas: {
-      cardTitle: "Necropolis of Iloi – Ispiluncas",
+      cardTitle: "Iloi – Ispiluncas",
       location: "Municipality of Sedilo",
       mainTitle: "Necropolis of Iloi – Ispiluncas",
       descTitle: "Description",
@@ -941,7 +941,7 @@ const resources = {
       },
     },
     mandras: {
-      cardTitle: "Necropolis of Mandras or Mrandas",
+      cardTitle: "Mandras",
       location: "Municipality of Ardauli",
       mainTitle: "Necropolis of Mandras or Mrandas",
       descTitle: "Description",
@@ -973,7 +973,7 @@ const resources = {
       },
     },
     brodu: {
-      cardTitle: "Necropolis of Brodu",
+      cardTitle: "Brodu",
       location: "Municipality of Oniferi",
       mainTitle: "Necropolis of Brodu",
       descTitle: "Description",
@@ -1005,7 +1005,7 @@ const resources = {
       },
     },
     istevéne: {
-      cardTitle: "Necropolis of Istevéne",
+      cardTitle: "Istevéne",
       location: "Municipality of Mamoiada",
       mainTitle: "Necropolis of Istevéne",
       descTitle: "Description",
@@ -1037,7 +1037,7 @@ const resources = {
       },
     },
     pranu_mutteddu: {
-      cardTitle: "Archaeological Park of Pranu Mutteddu",
+      cardTitle: "Pranu Mutteddu",
       location: "Municipality of Goni",
       mainTitle: "Archaeological Park of Pranu Mutteddu",
       descTitle: "Description",
@@ -1069,7 +1069,7 @@ const resources = {
       },
     },
     montessu: {
-      cardTitle: "Necropolis of Montessu",
+      cardTitle: "Montessu",
       location: "Municipality of Villaperuccio",
       mainTitle: "Necropolis of Montessu",
       descTitle: "Description",
@@ -1141,7 +1141,7 @@ const resources = {
       'Indietro': 'Indietru',
 
       anghelu_ruju: {
-      cardTitle: "Necropoli de Anghelu Ruju",
+      cardTitle: "Anghelu Ruju",
       location: "Cumune de Alghero",
       mainTitle: "Necropoli de Anghelu Ruju",
       descTitle: "Descritzione",
@@ -1173,7 +1173,7 @@ const resources = {
       },
     },
     puttu_codinu: {
-      cardTitle: "Necropoli de Puttu Codinu",
+      cardTitle: "Puttu Codinu",
       location: "Cumune de Villanova Monteleone",
       mainTitle: "Necropoli de Puttu Codinu",
       descTitle: "Descritzione",
@@ -1205,7 +1205,7 @@ const resources = {
       },
     },
     monte_siseri: {
-      cardTitle: "Necropoli de Monte Siseri / S’Incantu",
+      cardTitle: "S’Incantu",
       location: "Cumune de Putifigari",
       mainTitle: "Necropoli de Monte Siseri / S’Incantu",
       descTitle: "Descritzione",
@@ -1237,7 +1237,7 @@ const resources = {
       },
     },
     mesu_e_montes: {
-      cardTitle: "Necropoli de Mesu ’e Montes",
+      cardTitle: "Mesu ’e Montes",
       location: "Cumune de Ossi",
       mainTitle: "Necropoli de Mesu ’e Montes",
       descTitle: "Descritzione",
@@ -1269,7 +1269,7 @@ const resources = {
       },
     },
     su_crucifissu_mannu: {
-      cardTitle: "Necropoli de Su Crucifissu Mannu",
+      cardTitle: "Su Crucifissu Mannu",
       location: "Cumune de Porto Torres",
       mainTitle: "Necropoli de Su Crucifissu Mannu",
       descTitle: "Descritzione",
@@ -1301,7 +1301,7 @@ const resources = {
       },
     },
     orto_beneficio: {
-      cardTitle: "Domus de janas de s’Ortu de su Benefìtziu Parrochiale",
+      cardTitle: "Ortu de su Benefìtziu Parrochiale",
       location: "Cumune de Sennori",
       mainTitle: "Domus de janas de s’Ortu de su Benefìtziu Parrochiale",
       descTitle: "Descritzione",
@@ -1333,7 +1333,7 @@ const resources = {
       },
     },
     roccia_elefante: {
-      cardTitle: "Domus de janas de sa Roccia de s’Elefante",
+      cardTitle: "Roccia de s’Elefante",
       location: "Cumune de Castelsardo",
       mainTitle: "Domus de janas de sa Roccia de s’Elefante",
       descTitle: "Descritzione",
@@ -1397,7 +1397,7 @@ const resources = {
       },
     },
     santandrea_priu: {
-      cardTitle: "Necropoli de Sant’Andrea Priu",
+      cardTitle: "Sant’Andrea Priu",
       location: "Cumune de Bonorva",
       mainTitle: "Necropoli de Sant’Andrea Priu",
       descTitle: "Descritzione",
@@ -1429,7 +1429,7 @@ const resources = {
       },
     },
     sa_pala_larga: {
-      cardTitle: "Necropoli de Sa Pala Larga",
+      cardTitle: "Sa Pala Larga",
       location: "Cumune de Bonorva",
       mainTitle: "Necropoli de Sa Pala Larga",
       descTitle: "Descritzione",
@@ -1461,7 +1461,7 @@ const resources = {
       },
     },
     sos_forrighesos: {
-      cardTitle: "Necropoli de Sos Furrighesos",
+      cardTitle: "Sos Furrighesos",
       location: "Cumune de Anela",
       mainTitle: "Necropoli de Sos Furrighesos",
       descTitle: "Descritzione",
@@ -1493,7 +1493,7 @@ const resources = {
       },
     },
     iloi_ispiluncas: {
-      cardTitle: "Necropoli de Iloi – Ispiluncas",
+      cardTitle: "Iloi – Ispiluncas",
       location: "Cumune de Sedilo",
       mainTitle: "Necropoli de Iloi – Ispiluncas",
       descTitle: "Descritzione",
@@ -1525,7 +1525,7 @@ const resources = {
       },
     },
     mandras: {
-      cardTitle: "Necropoli de Mandras o Mrandas",
+      cardTitle: "Mandras",
       location: "Cumune de Ardauli",
       mainTitle: "Necropoli de Mandras o Mrandas",
       descTitle: "Descritzione",
@@ -1557,7 +1557,7 @@ const resources = {
       },
     },
     brodu: {
-      cardTitle: "Necropoli de Brodu",
+      cardTitle: "Brodu",
       location: "Cumune de Oniferi",
       mainTitle: "Necropoli de Brodu",
       descTitle: "Descritzione",
@@ -1589,7 +1589,7 @@ const resources = {
       },
     },
     istevéne: {
-      cardTitle: "Necropoli de Istevéne",
+      cardTitle: "Istevéne",
       location: "Cumune de Mamoiada",
       mainTitle: "Necropoli de Istevéne",
       descTitle: "Descritzione",
@@ -1621,7 +1621,7 @@ const resources = {
       },
     },
     pranu_mutteddu: {
-      cardTitle: "Parcu Archeologicu de Pranu Mutteddu",
+      cardTitle: "Pranu Mutteddu",
       location: "Cumune de Goni",
       mainTitle: "Parcu Archeologicu de Pranu Mutteddu",
       descTitle: "Descritzione",
@@ -1653,7 +1653,7 @@ const resources = {
       },
     },
     montessu: {
-      cardTitle: "Necropoli de Montessu",
+      cardTitle: "Montessu",
       location: "Cumune de Villaperuccio",
       mainTitle: "Necropoli de Montessu",
       descTitle: "Descritzione",

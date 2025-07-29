@@ -1,225 +1,157 @@
-// DrawingCanvas.tsx
-import React, { useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
-
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-
+import React, { useRef, useEffect, useImperativeHandle, forwardRef } from 'react';
 
 export type DrawingCanvasHandle = {
   resetCanvas: () => void;
 };
 
 interface DrawingCanvasProps {
-  test: string;
-  currentColor: string;
-  pngImage: string;
+  layerSrc: string;
+  basePath: string;
+  selectedSymbol: string;
 }
+
 export const DrawingCanvas = forwardRef<DrawingCanvasHandle, DrawingCanvasProps>(
-function DrawingCanvas({ test, currentColor, pngImage }: DrawingCanvasProps, ref) {
-  const mountRef = useRef<HTMLDivElement>(null);
-  const offCanvasRef = useRef<HTMLCanvasElement | null>(null);
-  const drawCtxRef = useRef<CanvasRenderingContext2D | null>(null);
-  const drawTextureRef = useRef<THREE.CanvasTexture | null>(null);
-  const currentColorRef = useRef<string>(currentColor);
-  const raycaster = new THREE.Raycaster();
-  const pointer = new THREE.Vector2();
-  const drawMeshRef = useRef<THREE.Mesh | null>(null);
-  const maskCanvasRef = useRef<HTMLCanvasElement | null>(null);
-  const maskCtxRef = useRef<CanvasRenderingContext2D | null>(null);
-  useImperativeHandle(ref, () => ({
+  function DrawingCanvas({ layerSrc, basePath, selectedSymbol }, ref) {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const displayCanvasRef = useRef<HTMLCanvasElement | null>(null);
+    const drawing = useRef(false);
+
+    const baseImageRef = useRef<HTMLImageElement | null>(null);
+    const pigmentImagesRef = useRef<Record<string, HTMLImageElement>>({});
+    const maskCanvasesRef = useRef<Record<string, HTMLCanvasElement>>({});
+    const imagesLoaded = useRef<{ base: boolean; pigments: Record<string, boolean> }>({ base: false, pigments: {} });
+
+    useImperativeHandle(ref, () => ({
       resetCanvas: () => {
-        if (offCanvasRef.current && drawCtxRef.current && drawTextureRef.current) {
-      drawCtxRef.current.clearRect(0, 0, offCanvasRef.current.width, offCanvasRef.current.height);
-      drawTextureRef.current.needsUpdate = true;
-    }
-  },
-  getCompletion: () => computeCoverage(),
+        // clear all mask canvases
+        Object.values(maskCanvasesRef.current).forEach(mc => {
+          const ctx = mc.getContext('2d');
+          if (ctx) ctx.clearRect(0, 0, mc.width, mc.height);
+        });
+        // re-render everything
+        render();
+      }
     }));
-  function computeCoverage(): number {
-  const drawCtx = drawCtxRef.current;
-  const maskCtx = maskCtxRef.current;
-  if (!drawCtx || !maskCtx) return 0;
 
-  const drawData = drawCtx.getImageData(0, 0, 4096, 4096).data;
-  const maskData = maskCtx.getImageData(0, 0, 4096, 4096).data;
+    const render = () => {
+      const base = baseImageRef.current;
+      const display = displayCanvasRef.current;
+      if (!base || !display || !imagesLoaded.current.base) return;
+      const ctx = display.getContext('2d');
+      if (!ctx) return;
 
-  let total = 0;
-  let covered = 0;
+      // draw base layer
+      ctx.clearRect(0, 0, display.width, display.height);
+      ctx.drawImage(base, 0, 0, display.width, display.height);
 
-  for (let i = 0; i < maskData.length; i += 4) {
-    const maskAlpha = maskData[i + 3];
-    if (maskAlpha > 128) {
-      total++;
-      const drawAlpha = drawData[i + 3];
-      if (drawAlpha > 128) covered++;
-    }
-  }
+      // draw each pigment layer using its mask
+      Object.keys(maskCanvasesRef.current).forEach(src => {
+        if (!imagesLoaded.current.pigments[src]) return;
+        const pigment = pigmentImagesRef.current[src];
+        const mask = maskCanvasesRef.current[src];
+        if (!pigment || !mask) return;
 
-  return total > 0 ? covered / total : 0;
-}
-
-  useEffect(() => {
-    currentColorRef.current = currentColor;
-  }, [currentColor]);
-
-  useEffect(() => {
-    if (!mountRef.current) return;
-
-    // cleanup previous offCanvas if still present
-    if (offCanvasRef.current && document.body.contains(offCanvasRef.current)) {
-      document.body.removeChild(offCanvasRef.current);
-      offCanvasRef.current = null;
-      drawCtxRef.current = null;
-      drawTextureRef.current = null;
-    }
-    // clear mount container
-    if (mountRef.current) {
-      mountRef.current.innerHTML = '';
-    }
-
-    // Three.js setup
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      45,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
-    camera.position.set(0, 1, 0);
-    camera.lookAt(0, 0, 0);
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x000000, 0);
-    mountRef.current.appendChild(renderer.domElement);
-
-    // offscreen canvas for drawing
-    const offCanvas = document.createElement('canvas');
-    offCanvas.width = offCanvas.height = 4096;
-    offCanvas.style.display = 'none';
-    document.body.appendChild(offCanvas);
-    offCanvasRef.current = offCanvas;
-    const ctx = offCanvas.getContext('2d');
-    if (!ctx) return;
-    ctx.clearRect(0, 0, offCanvas.width, offCanvas.height);
-    drawCtxRef.current = ctx;
-
-    const maskCanvas = document.createElement('canvas');
-    maskCanvas.width = maskCanvas.height = 4096;
-    const maskCtx = maskCanvas.getContext('2d')!;
-    const img = new Image();
-    img.crossOrigin = 'anonymous'; // utile se il PNG viene da altra origine
-    img.src = pngImage;
-    img.onload = () => {
-      maskCtx.drawImage(img, 0, 0, 4096, 4096);
-    };
-
-    const drawTexture = new THREE.CanvasTexture(offCanvas);
-    drawTexture.minFilter = THREE.LinearFilter;
-    drawTexture.magFilter = THREE.LinearFilter;
-    drawTextureRef.current = drawTexture;
-
-    // png overlay material
-    const pngTex = new THREE.TextureLoader().load(pngImage);
-    pngTex.minFilter = THREE.LinearFilter;
-    pngTex.magFilter = THREE.LinearFilter;
-    pngTex.wrapS = pngTex.wrapT = THREE.RepeatWrapping;
-    const pngMat = new THREE.MeshStandardMaterial({
-      map: pngTex,
-      transparent: true,
-      opacity: 0.1,
-      depthWrite: false,
-      side: THREE.DoubleSide,
-    });
-
-    // load GLB
-    const loader = new GLTFLoader();
-    loader.load(test, (gltf) => {
-      const mesh = gltf.scene.children.find(c => c instanceof THREE.Mesh) as THREE.Mesh;
-      if (!mesh) return;
-      const origMat = mesh.material as THREE.MeshStandardMaterial;
-      const drawMat = new THREE.MeshStandardMaterial({
-        map: drawTexture,
-        normalMap: origMat.normalMap,
-        transparent: true,
-        depthWrite: false,
-        side: THREE.DoubleSide,
+        // create temporary canvas for masked pigment
+        const tmp = document.createElement('canvas');
+        tmp.width = display.width;
+        tmp.height = display.height;
+        const tctx = tmp.getContext('2d')!;
+        // copy mask
+        tctx.drawImage(mask, 0, 0, tmp.width, tmp.height);
+        // apply pigment only where mask
+        tctx.globalCompositeOperation = 'source-in';
+        tctx.drawImage(pigment, 0, 0, tmp.width, tmp.height);
+        // composite over base
+        ctx.drawImage(tmp, 0, 0);
       });
-      mesh.material = [origMat, pngMat, drawMat];
-      mesh.geometry.clearGroups();
-      mesh.geometry.addGroup(0, mesh.geometry.index!.count, 0);
-      mesh.geometry.addGroup(0, mesh.geometry.index!.count, 1);
-      mesh.geometry.addGroup(0, mesh.geometry.index!.count, 2);
-      drawMeshRef.current = mesh;
-      scene.add(mesh);
-    });
-
-    scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 1));
-    const dl = new THREE.DirectionalLight(0xffffff, 0.8);
-    dl.position.set(2, 4, 5);
-    scene.add(dl);
-
-    let drawing = false;
-    const onDown = () => (drawing = true);
-    const onUp = () => (drawing = false);
-    const onLeave = () => (drawing = false);
-    const onMove = (e: PointerEvent) => {
-      if (!drawing || !drawCtxRef.current || !drawTextureRef.current || !drawMeshRef.current) return;
-      pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
-      pointer.y = -(e.clientY / window.innerHeight) * 2 + 1;
-      raycaster.setFromCamera(pointer, camera);
-      const intersect = raycaster.intersectObject(drawMeshRef.current, true);
-      if (intersect.length) {
-        const uv = intersect[0].uv!;
-        const x = uv.x * offCanvas.width;
-        const y = (1 - uv.y) * offCanvas.height;
-        const grad = drawCtxRef.current!.createRadialGradient(x, y, 0, x, y, 40);
-        grad.addColorStop(0, currentColorRef.current);
-        grad.addColorStop(1, `${currentColorRef.current}00`);
-        drawCtxRef.current!.fillStyle = grad;
-        drawCtxRef.current!.beginPath();
-        drawCtxRef.current!.arc(x, y, 40, 0, Math.PI * 2);
-        drawCtxRef.current!.fill();
-        drawTextureRef.current.needsUpdate = true;
-      }
     };
 
-    const dom = renderer.domElement;
-    dom.style.touchAction = 'none';
-    dom.style.position = 'absolute';
-  
-    
-    dom.addEventListener('pointerdown', onDown);
-    dom.addEventListener('pointerup', onUp);
-    dom.addEventListener('pointerleave', onLeave);
-    dom.addEventListener('pointermove', onMove);
+    const handleDraw = (e: PointerEvent) => {
+      if (!drawing.current || !layerSrc) return;
+      const mask = maskCanvasesRef.current[layerSrc];
+      const display = displayCanvasRef.current;
+      if (!mask || !display) return;
+      const mctx = mask.getContext('2d');
+      if (!mctx) return;
 
-    (function animate() {
-      requestAnimationFrame(animate);
-      renderer.render(scene, camera);
-    })();
+      const rect = display.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * mask.width;
+      const y = ((e.clientY - rect.top) / rect.height) * mask.height;
 
-    return () => {
-      dom.removeEventListener('pointerdown', onDown);
-      dom.removeEventListener('pointerup', onUp);
-      dom.removeEventListener('pointerleave', onLeave);
-      dom.removeEventListener('pointermove', onMove);
-      if (mountRef.current) mountRef.current.innerHTML = '';
-      if (offCanvasRef.current && document.body.contains(offCanvasRef.current)) {
-        document.body.removeChild(offCanvasRef.current);
-      }
-      if (maskCanvasRef.current && document.body.contains(maskCanvasRef.current)) {
-        document.body.removeChild(maskCanvasRef.current);
-}
+      mctx.fillStyle = 'white';
+      mctx.beginPath();
+      mctx.arc(x, y, 30, 0, Math.PI * 2);
+      mctx.fill();
+
+      render();
     };
-  }, [test, pngImage]);
 
-  return <div ref={mountRef} className="w-full h-full fixed top-0 left-0 z-0" />;
-});
+    // initialize base canvas and base image
+    useEffect(() => {
+      const container = containerRef.current;
+      if (!container) return;
+      container.innerHTML = '';
 
+      const canvas = document.createElement('canvas');
+      canvas.width = 1024;
+      canvas.height = 1024;
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+      displayCanvasRef.current = canvas;
+      container.appendChild(canvas);
 
+      imagesLoaded.current = { base: false, pigments: {} };
+      maskCanvasesRef.current = {};
+      pigmentImagesRef.current = {};
 
-//const completion = drawingCanvasRef.current?.getCompletion();
-//if (completion >= 0.95) {
-//  console.log('Completato!');
-//
+      const base = new Image();
+      base.src = `${basePath}/${selectedSymbol}.png`;
+      base.onload = () => {
+        imagesLoaded.current.base = true;
+        render();
+      };
+      baseImageRef.current = base;
+    }, [basePath, selectedSymbol]);
+
+    // update mask & pigment on layerSrc change
+    useEffect(() => {
+      if (!layerSrc) return;
+      // ensure mask canvas exists
+      if (!maskCanvasesRef.current[layerSrc]) {
+        const mc = document.createElement('canvas');
+        mc.width = 1024;
+        mc.height = 1024;
+        maskCanvasesRef.current[layerSrc] = mc;
+      }
+      // load pigment image fresh
+      const pigment = new Image();
+      pigment.src = layerSrc;
+      pigment.onload = () => {
+        imagesLoaded.current.pigments[layerSrc] = true;
+        pigmentImagesRef.current[layerSrc] = pigment;
+        render();
+      };
+    }, [layerSrc]);
+
+    // pointer events
+    useEffect(() => {
+      const canvas = displayCanvasRef.current;
+      if (!canvas) return;
+      const down = () => (drawing.current = true);
+      const up = () => (drawing.current = false);
+      const leave = () => (drawing.current = false);
+      canvas.addEventListener('pointerdown', down);
+      canvas.addEventListener('pointerup', up);
+      canvas.addEventListener('pointerleave', leave);
+      canvas.addEventListener('pointermove', handleDraw);
+      return () => {
+        canvas.removeEventListener('pointerdown', down);
+        canvas.removeEventListener('pointerup', up);
+        canvas.removeEventListener('pointerleave', leave);
+        canvas.removeEventListener('pointermove', handleDraw);
+      };
+    }, [layerSrc]);
+
+    return <div ref={containerRef} className="absolute top-0 left-0 w-full h-full" />;
+  }
+);

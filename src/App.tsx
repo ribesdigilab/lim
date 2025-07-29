@@ -1,5 +1,4 @@
-// App.tsx
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState , useEffect} from 'react';
 import { useTranslation } from 'react-i18next';
 import i18n from './i18n';
 import { LanguageSelector } from './LanguageSelector';
@@ -9,16 +8,21 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MapPanel } from './MapPanel';
 import { SymbolPanel } from './Symbol';
 import { PanelInfo } from './PanelInfo';
-// Mappa simboli per ogni tempio (espandibile)
+
+const allTemples = [
+  'mandras','monte_siseri','mesu_e_montes','sos_forrighesos','santandrea_priu','montessu','istevéne','puttu_codinu',
+  'su_crucifissu_mannu', 'orto_beneficio','roccia_elefante', 'parco_petroglifi','sa_pala_larga', 'iloi_ispiluncas','brodu', 'anghelu_ruju','pranu_mutteddu'
+];
+
 const symbolsByTemple: Record<string, string[]> = {
-  istevéne: ['/simbolo0.png'],
-  montessu: ['/simbolo1.png'],
+  istevéne: [],
+  montessu: [],
   anghelu_ruju: [],
   puttu_codinu: [],
-  monte_siseri: [],
+  monte_siseri: ['simbolo1'],
   brodu: [],
   iloi_ispiluncas: [],
-  mandras: [],
+  mandras: ['simbolo1'],
   mesu_e_montes: [],
   orto_beneficio: [],
   parco_petroglifi: [],
@@ -30,190 +34,131 @@ const symbolsByTemple: Record<string, string[]> = {
   su_crucifissu_mannu: [],
 };
 
-
-
 export default function App() {
   const { t } = useTranslation();
   const canvasRef = useRef<DrawingCanvasHandle>(null);
   const [showStartScreen, setShowStartScreen] = useState(true);
-  const [color, setColor] = useState<string>('#000000');
+  const [color, setColor] = useState<string>('');
   const [selectedTemple, setSelectedTemple] = useState<string | null>(null);
   const [selectedSymbol, setSelectedSymbol] = useState<string | null>(null);
+  const [page, setPage] = useState(0);
 
+  const itemsPerPage = 6;
+  const totalPages = Math.ceil(allTemples.length / itemsPerPage);
+  const currentPageTemples = allTemples.slice(
+    page * itemsPerPage,
+    page * itemsPerPage + itemsPerPage
+  );
 
-  const pigmentsByTemple: Record<string, { name: string; value: string; desc: string }[]> = {
-    anghelu_ruju: [
-      { name: 'Rosso Scuro', value: '#8b0000', desc: t('anghelu_ruju.rosso.pigmentDescTitle') },
-      { name: 'Marrone', value: '#a0522d', desc: t('anghelu_ruju.marrone.pigmentDescTitle') },
-      { name: 'Nero', value: '#000000', desc: t('anghelu_ruju.nero.pigmentDescTitle') },
+  const prevPage = () => setPage(p => Math.max(0, p - 1));
+  const nextPage = () => setPage(p => Math.min(totalPages - 1, p + 1));
+
+  const pigmentsByTemple: Record<string, { name: string; value: string; layer:string; desc: string }[]> = {
+    mandras: [
+      { name: 'Rosso Scuro', value: '#8b0000',layer:'/simboli/mandras/simbolo11.png', desc: t('anghelu_ruju.rosso.pigmentDescTitle') },
+      
     ],
-    istevéne: [
-      { name: 'Rosso Scuro', value: '#8b0000', desc: t('anghelu_ruju.rosso.pigmentDescTitle') },
-      { name: 'Marrone', value: '#a0522d', desc: t('anghelu_ruju.marrone.pigmentDescTitle') },
-      { name: 'Nero', value: '#000000', desc: t('anghelu_ruju.nero.pigmentDescTitle') },
+    monte_siseri: [
+      { name: 'Rosso Scuro', value: '#ff0000', layer:'/simboli/monte_siseri/simbolo12.png', desc: t('monte_siseri.rosso.pigmentDescTitle') },
+      { name: 'Blu', value: '#0000ff', layer:'/simboli/monte_siseri/simbolo11.png', desc: t('monte_siseri.blu.pigmentDescTitle') },
     ],
-    montessu: [
-      { name: 'Sabbia', value: '#cd853f', desc: t('montessu.sabbia.pigmentDescTitle') },
-      { name: 'Verde Oliva', value: '#556b2f', desc: t('montessu.verde.pigmentDescTitle') },
-      { name: 'Nero', value: '#000000', desc: t('montessu.nero.pigmentDescTitle') },
-    ],
-    // Aggiungi altri templi qui
   };
-
 
   const pigments = selectedTemple ? pigmentsByTemple[selectedTemple] ?? [] : [];
+
+  const currentLayer = pigments.find(p => p.value === color)?.layer;
+
+
+  useEffect(() => {
+  if (pigments.length > 0 && (!color || !pigments.some(p => p.value === color))) {
+    setColor(pigments[0].value);
+  }
+}, [pigments]);
+
   const handleReset = () => canvasRef.current?.resetCanvas();
-  const handleBack = () => {
-    setSelectedSymbol(null);
-  };
   const handleTempleBack = () => {
     setSelectedTemple(null);
     setSelectedSymbol(null);
   };
 
-  // Schermata iniziale Start
   if (showStartScreen) {
     return (
       <div className="w-screen h-screen flex items-center justify-center relative"
-      style={{
-        backgroundImage: `url(/screensaver.png)`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}>
+        style={{ backgroundImage: `url(/screensaver.png)`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <button
           onClick={() => setShowStartScreen(false)}
           className="text-white w-auto h-[15rem] px-14 py-6 text-3xl transition uppercase"
-          style={{
-            backgroundImage: "url('/Rectangle 1.png')",
-            backgroundSize: '100% 100%',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
+          style={{ backgroundImage: "url('/Rectangle 1.png')", backgroundSize: '100% 100%' }}
         >
-          {t('Il muro dei pigmenti')}<br/>
+          {t('Il muro dei pigmenti')}<br />
           <div className="text-sm mt-12">{t('Tocca per continuare')}</div>
         </button>
       </div>
     );
   }
 
-  // Schermata selezione Domus
   if (!selectedTemple) {
     return (
       <div className="w-screen h-screen flex flex-col items-center justify-center space-y-6 relative"
-      style={{
-        backgroundImage: `url(/screensaver2.png)`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        }}>
+        style={{ backgroundImage: `url(/screensaver2.png)`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <LanguageSelector />
-        <div
-          className="p-8 flex flex-col items-center space-y-6"
-          style={{
-            backgroundImage: "url('/Rectangle 1.png')",
-            backgroundSize: '100% 100%',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
-        >
-          <h1 className="text-white text-4xl font-bold text-center">{t('Scegli la Domus')}</h1>
-          <div className=" grid grid-cols-5 gap-x-4 gap-y-4 uppercase">
-            
-            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md uppercase" style={{ backgroundImage: "url('/bottoni/anghelu_ruju.webp')" }} onClick={() => setSelectedTemple('anghelu_ruju')}>Anghelu Ruju</button>
-            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md uppercase" style={{ backgroundImage: "url('/bottoni/puttu_codinu.webp')" }} onClick={() => setSelectedTemple('puttu_codinu')}>Puttu Codinu</button>
-            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md uppercase" style={{ backgroundImage: "url('/bottoni/monte_siseri.webp')" }} onClick={() => setSelectedTemple('monte_siseri')}>Monte Siseri / S’Incantu</button>
-            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md uppercase" style={{ backgroundImage: "url('/bottoni/mesu_e_montes.webp')" }} onClick={() => setSelectedTemple('mesu_e_montes')}>Mesu ’e Montes</button>
-            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md uppercase" style={{ backgroundImage: "url('/bottoni/su_crucifissu_mannu.webp')" }} onClick={() => setSelectedTemple('su_crucifissu_mannu')}>Su Crucifissu Mannu</button>
-            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md uppercase" style={{ backgroundImage: "url('/bottoni/orto_beneficio.webp')" }} onClick={() => setSelectedTemple('orto_beneficio')}>Orto del Beneficio</button>
-            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md uppercase" style={{ backgroundImage: "url('/bottoni/roccia_elefante.webp')" }} onClick={() => setSelectedTemple('roccia_elefante')}>Roccia dell’Elefante</button>
-            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md uppercase" style={{ backgroundImage: "url('/bottoni/parco_petroglifi.webp')" }} onClick={() => setSelectedTemple('parco_petroglifi')}>Parco dei Petroglifi</button>
-            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md uppercase" style={{ backgroundImage: "url('/bottoni/santandrea_priu.webp')" }} onClick={() => setSelectedTemple('santandrea_priu')}>Sant’Andrea Priu</button>
-            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md uppercase" style={{ backgroundImage: "url('/bottoni/sa_pala_larga.webp')" }} onClick={() => setSelectedTemple('sa_pala_larga')}>Sa Pala Larga</button>
-            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md uppercase" style={{ backgroundImage: "url('/bottoni/sos_furrighesos.webp')" }} onClick={() => setSelectedTemple('sos_forrighesos')}>Sos Furrighesos</button>
-            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md uppercase" style={{ backgroundImage: "url('/bottoni/iloi_ispiluncas.webp')" }} onClick={() => setSelectedTemple('iloi_ispiluncas')}>Iloi – Ispiluncas</button>
-            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md uppercase" style={{ backgroundImage: "url('/bottoni/mandras.webp')" }} onClick={() => setSelectedTemple('mandras')}>Mandras o Mrandas</button>
-            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md uppercase" style={{ backgroundImage: "url('/bottoni/brodu.webp')" }} onClick={() => setSelectedTemple('brodu')}>Brodu</button>
-            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md uppercase" style={{ backgroundImage: "url('/bottoni/istevene.webp')" }} onClick={() => setSelectedTemple('istevéne')}>Istevéne</button>
-            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md uppercase" style={{ backgroundImage: "url('/bottoni/pranu_mutteddu.webp')" }} onClick={() => setSelectedTemple('pranu_mutteddu')}>Pranu Mutteddu</button>
-            <button className="w-40 h-24 bg-cover bg-center text-white rounded shadow-md uppercase" style={{ backgroundImage: "url('/bottoni/montessu.webp')" }} onClick={() => setSelectedTemple('montessu')}>Montessu</button>
+        <div className="relative p-8 flex flex-col items-center space-y-4">
+          <div className="flex items-center space-x-4  backdrop-blur-sm">
+            <button onClick={prevPage} disabled={page === 0} className="w-[5rem] h-[5rem]"
+              style={{ backgroundImage: "url('/back.svg')", backgroundSize: 'contain', opacity: page === 0 ? 0.3 : 1 }} />
+            <div style={{ backgroundImage: "url('/Rectangle 1.png')", backgroundSize: '100% 100%' }}>
+              <h1 className="text-white text-4xl pt-4 mt-8 uppercase text-center">{t('Scegli la Domus')}</h1>
+              <div className="grid grid-cols-3 p-4 gap-4 ml-10 mr-10">
+                {currentPageTemples.map(slug => (
+                  <button key={slug} className="relative w-[12rem] hover:border-2 h-24 bg-cover bg-center text-white italic rounded-2xl shadow-md uppercase"
+                    style={{ backgroundImage: `url('/bottoni/${slug}.webp')` }}
+                    onClick={() => setSelectedTemple(slug)}>
+                    <div className="absolute inset-0 opacity-50 rounded-2xl"
+                      style={{ background: "linear-gradient(0deg, #BA3B00 5%, #000000 50%)" }} />
+                    <span className="relative z-10">{t(`${slug}.cardTitle`)}</span>
+                  </button>
+                ))}
+              </div>
+              <div className="text-white flex item-center justify-center mb-8">{page + 1} / {totalPages}</div>
+            </div>
+            <button onClick={nextPage} disabled={page === totalPages - 1} className="w-[5rem] h-[5rem]"
+              style={{ backgroundImage: "url('/forward.svg')", backgroundSize: 'contain', opacity: page === totalPages - 1 ? 0.3 : 1 }} />
           </div>
         </div>
-        
-        <button
-          onClick={() => setShowStartScreen(true)}
-          className="absolute left-8 bottom-6 w-[5rem] h-[5rem] z-50"
-          style={{
-            backgroundImage: "url('/back.svg')",
-            backgroundSize: '100% 100%',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
+        <button onClick={() => setShowStartScreen(true)} className="absolute left-8 bottom-6 w-[5rem] h-[5rem] z-50"
+          style={{ backgroundImage: "url('/back.svg')", backgroundSize: '100% 100%' }} />
       </div>
     );
   }
 
-  // Schermata selezione Simbolo
   if (selectedTemple && !selectedSymbol) {
-    const availableSymbols = symbolsByTemple[selectedTemple] || [];
     return (
       <div className="w-screen h-screen flex flex-col items-center justify-center relative"
-       style={{
-        backgroundImage: `url(/landing_page/${selectedTemple}.png)`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}>
+        style={{ backgroundImage: `url(/landing_page/${selectedTemple}.png)`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <LanguageSelector />
+        <h1 className="absolute w-40 top-6 inline-block text-center text-white text-4xl font-bold uppercase z-50 drop-shadow pointer-events-none">
+          {t(`${selectedTemple}.cardTitle`)}
+        </h1>
         <SymbolPanel
-  symbols={symbolsByTemple[selectedTemple] || []}
-  onSelect={sym => {
-    setSelectedSymbol(sym);
-    
-  }}
-/>
-      <MapPanel selectedTemple={selectedTemple!} />
-        
-        <button
-          onClick={handleTempleBack}
-          className="absolute left-8 bottom-6 w-[5rem] h-[5rem] z-50"
-          style={{
-            backgroundImage: "url('/back.svg')",
-            backgroundSize: '100% 100%',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
+          symbols={symbolsByTemple[selectedTemple] || []}
+          onSelect={sym => setSelectedSymbol(sym)}
         />
-         <PanelInfo selectedTemple={selectedTemple!} />
+        <MapPanel selectedTemple={selectedTemple!} />
+        <button onClick={handleTempleBack} className="absolute left-8 bottom-6 w-[5rem] h-[5rem] z-50"
+          style={{ backgroundImage: "url('/back.svg')", backgroundSize: '100% 100%' }} />
+        <PanelInfo selectedTemple={selectedTemple!} />
       </div>
     );
   }
-
-  // Canvas + GUI
-  const availableSymbols = symbolsByTemple[selectedTemple] || [];
-  const firstSymbol = availableSymbols[0] ?? null;
 
   return (
     <>
-      {/* Symbol panel persistent */}
       <SymbolPanel
-    symbols={symbolsByTemple[selectedTemple] || []}
-    onSelect={sym => setSelectedSymbol(sym)}
+        symbols={symbolsByTemple[selectedTemple!] || []}
+        onSelect={sym => setSelectedSymbol(sym)}
       />
-      {/* Back to Symbol selection */}
-      <button
-        onClick={() => setSelectedSymbol(null)}
-        className="absolute left-8 bottom-6 w-[5rem] h-[5rem] z-50"
-        style={{
-          backgroundImage: "url('/back.svg')",
-          backgroundSize: '100% 100%',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
-      />
-
+      <button onClick={() => setSelectedSymbol(null)} className="absolute left-8 bottom-6 w-[5rem] h-[5rem] z-50"
+        style={{ backgroundImage: "url('/back.svg')", backgroundSize: '100% 100%' }} />
       <LanguageSelector />
       <MapPanel selectedTemple={selectedTemple!} />
       <PigmentSelector
@@ -222,30 +167,24 @@ export default function App() {
         currentColor={color}
         onSelect={setColor}
         onReset={handleReset}
-       
       />
-
-      {/* Canvas fade-in */}
       <AnimatePresence>
         {selectedSymbol && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-            className="absolute top-0 left-0 w-full h-full pointer-events-auto"
-          >
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.8 }}
+            className="absolute top-0 left-0 w-full h-full pointer-events-auto">
+            <h1 className="absolute top-6 pointer-events-none text-center text-white text-6xl uppercase z-50 drop-shadow left-1/2 transform -translate-x-1/2">
+              {t(`${selectedTemple}.cardTitle`)} <br />
+              <h3 className="text-5xl">{selectedSymbol}</h3>
+            </h1>
             <DrawingCanvas
               ref={canvasRef}
-              test="/roccia.glb"
-              currentColor={color}
-              pngImage={selectedSymbol ?? firstSymbol!}
+              basePath={`/simboli/${selectedTemple}`}
+              selectedSymbol={selectedSymbol!}
+              layerSrc={currentLayer!}
             />
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Sfondo nero quando il canvas è assente */}
       {!selectedSymbol && <div className="absolute inset-0 bg-black" />}
     </>
   );
