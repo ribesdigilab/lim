@@ -19,18 +19,18 @@ const symbolsByTemple: Record<string, string[]> = {
   montessu: [],
   anghelu_ruju: [],
   puttu_codinu: [],
-  monte_siseri: ['simbolo1'],
+  monte_siseri: ['sincantu1'],
   brodu: [],
   iloi_ispiluncas: [],
-  mandras: ['simbolo1'],
-  mesu_e_montes: [],
+  mandras: ['mandras1'],
+  mesu_e_montes: ['mesu1'],
   orto_beneficio: [],
   parco_petroglifi: [],
   pranu_mutteddu: [],
   roccia_elefante: [],
   sa_pala_larga: [],
   santandrea_priu: [],
-  sos_forrighesos: [],
+  sos_forrighesos: ['forrighesos1', 'forrighesos2'],
   su_crucifissu_mannu: [],
 };
 
@@ -55,18 +55,48 @@ export default function App() {
 
   const pigmentsByTemple: Record<string, { name: string; value: string; layer:string; desc: string }[]> = {
     mandras: [
-      { name: 'Rosso Scuro', value: '#8b0000',layer:'/simboli/mandras/simbolo11.png', desc: t('anghelu_ruju.rosso.pigmentDescTitle') },
+      { name: 'Rosso Scuro', value: '#8b0000',layer:'/simboli/mandras/mandras11.png', desc: t('anghelu_ruju.rosso.pigmentDescTitle') },
       
     ],
     monte_siseri: [
-      { name: 'Rosso Scuro', value: '#ff0000', layer:'/simboli/monte_siseri/simbolo12.png', desc: t('monte_siseri.rosso.pigmentDescTitle') },
-      { name: 'Blu', value: '#0000ff', layer:'/simboli/monte_siseri/simbolo11.png', desc: t('monte_siseri.blu.pigmentDescTitle') },
+      { name: 'Rosso Scuro', value: '#ff0000', layer:'/simboli/monte_siseri/sincantu12.png', desc: t('monte_siseri.rosso.pigmentDescTitle') },
+      { name: 'Blu', value: '#0000ff', layer:'/simboli/monte_siseri/sincantu11.png', desc: t('monte_siseri.blu.pigmentDescTitle') },
+    ],
+     mesu_e_montes: [
+      { name: 'Rosso Scuro', value: '#8b0000',layer:'/simboli/mesu_e_montes/mesu11.png', desc: t('mesu_e_montes.rosso.pigmentDescTitle') },
+      
+    ],
+    sos_forrighesos: [
+      { name: 'Rosso Scuro', value: '#8b0000', layer:'/simboli/sos_forrighesos/forrighesos11.png', desc: t('sos_forrighesos.rosso.pigmentDescTitle') },
+      { name: 'Rosso Scuro', value: '#8b0000', layer:'/simboli/sos_forrighesos/forrighesos21.png', desc: t('sos_forrighesos.rosso.pigmentDescTitle') },
     ],
   };
 
+
+  const layersBySymbolAndColor: Record<string, Record<string, string>> = {
+    // simbolo -> colore -> path immagine
+    forrighesos1: {
+      '#8b0000': '/simboli/sos_forrighesos/forrighesos11.png'
+    },
+    forrighesos2: {
+      '#8b0000': '/simboli/sos_forrighesos/forrighesos21.png'
+    },
+    mandras1: {
+      '#8b0000': '/simboli/mandras/mandras11.png'
+    },
+    mesu1: {
+      '#8b0000': '/simboli/mesu_e_montes/mesu11.png'
+    },
+    sincantu1: {
+      '#ff0000': '/simboli/monte_siseri/sincantu12.png',
+      '#0000ff': '/simboli/monte_siseri/sincantu11.png'
+    },
+  };
+
+
   const pigments = selectedTemple ? pigmentsByTemple[selectedTemple] ?? [] : [];
 
-  const currentLayer = pigments.find(p => p.value === color)?.layer;
+  const currentLayer = selectedSymbol ? layersBySymbolAndColor[selectedSymbol]?.[color] : undefined;
 
 
   useEffect(() => {

@@ -66,22 +66,28 @@ export const DrawingCanvas = forwardRef<DrawingCanvasHandle, DrawingCanvasProps>
       });
     };
 
-    const handleDraw = (e: PointerEvent) => {
+      const handleDraw = (e: PointerEvent) => {
       if (!drawing.current || !layerSrc) return;
-      const mask = maskCanvasesRef.current[layerSrc];
       const display = displayCanvasRef.current;
-      if (!mask || !display) return;
-      const mctx = mask.getContext('2d');
-      if (!mctx) return;
+      if (!display) return;
 
       const rect = display.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * mask.width;
-      const y = ((e.clientY - rect.top) / rect.height) * mask.height;
+      const x = ((e.clientX - rect.left) / rect.width) * 1024;
+      const y = ((e.clientY - rect.top) / rect.height) * 1024;
 
-      mctx.fillStyle = 'white';
-      mctx.beginPath();
-      mctx.arc(x, y, 30, 0, Math.PI * 2);
-      mctx.fill();
+      // Cancella quel punto da tutte le maschere
+      Object.entries(maskCanvasesRef.current).forEach(([src, canvas]) => {
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        ctx.save();
+        ctx.globalCompositeOperation = (src === layerSrc) ? 'source-over' : 'destination-out';
+        ctx.fillStyle = 'white';
+        ctx.beginPath();
+        ctx.arc(x, y, 30, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
 
       render();
     };
