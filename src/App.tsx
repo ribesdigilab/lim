@@ -84,7 +84,7 @@ export default function App() {
     mandras1: {
       '#8b0000': '/simboli/mandras/mandras11.png'
     },
-    mesu1: {
+    mesu_e_montes: {
       '#8b0000': '/simboli/mesu_e_montes/mesu11.png'
     },
     sincantu1: {
