@@ -21,18 +21,22 @@ export function SymbolPanel({ symbols, onSelect }: SymbolProps) {
           {symbols.map((sym, idx) => {
             const baseName = sym.replace(/^\/+|\.png$/g, '');
             return (
-              <button
-                key={idx}
-                onClick={() => onSelect(sym)}
-                className="w-10 h-10 rounded"
-                title={`Symbol ${idx}`}
-              >
-                <img
-                  src={`/${baseName}.svg`}
-                  alt={`Symbol ${idx}`}
-                  className="w-full h-full object-cover"
-                />
-              </button>
+              <React.Fragment key={idx}>
+                <button
+                  onClick={() => onSelect(sym)}
+                  className="w-10 h-10 rounded"
+                  title={`Symbol ${idx}`}
+                >
+                  <img
+                    src={`/${baseName}.svg`}
+                    alt={`Symbol ${idx}`}
+                    className="w-full h-full object-cover"
+                  />
+                </button>
+                {symbols.length > 1 && idx < symbols.length - 1 && (
+                  <div className="w-full h-px bg-white my-2" />
+                )}
+              </React.Fragment>
             );
           })}
         </div>

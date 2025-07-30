@@ -4,7 +4,14 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
   it: {
     translation: {
-      
+      mandras1 : 'Tomba 1',
+      montessu1: 'Esterno',
+      sincantu1: 'Tetto',
+      mesu1: 'Tomba 2',
+      forrighesos1: 'Tomba 2',
+      forrighesos2: 'Bassorilievo di toro',
+
+
       anghelu_ruju: {
         cardTitle: "Anghelu Ruju",
         location: "Comune di Alghero",
@@ -551,10 +558,28 @@ const resources = {
         
       }
     },
+    
+      'mandras1':'cupola',
+
+
   
   },
   en: {
+
+    
+      
+
+
     translation: {
+
+      mandras1 : 'Tomb 1',
+      montessu1: 'Exterior',
+      sincantu1: 'Roof',
+      mesu1: 'Tomb 2',
+      forrighesos1: 'Tomb 2',
+      forrighesos2: 'Bull relief',
+
+
       anghelu_ruju: {
       cardTitle: "Anghelu Ruju",
       location: "Municipality of Alghero",
@@ -1121,24 +1146,14 @@ const resources = {
   },
   sc: {
     translation: {
-      info: {
-        title: 'Informatziones',
-        text: 'Esempiu testu informatziones',
-      },
-      pigments: {
-        'Rosso Scuro': 'Arrùbiu scuru',
-        'Marrone': 'Brunu',
-        'Sabbia': 'Arena',
-        'Verde Oliva': 'Bidre Oliva',
-        'Nero': 'Neru',
-      },
-      language: 'Limba',
-      'Scegli il pigmento:': 'Scegli il pigmento',
-      'Scegli il simbolo': 'Scegli su simbulu',
-      'Scegli la Domus': 'Scegli sa Domus',
-      'Il muro dei pigmenti': 'Su muru de is pigmentos',
-      'Tocca per continuare': 'Toca pro cuntinuare',
-      'Indietro': 'Indietru',
+      
+      mandras1 : 'Tomba 1',
+      montessu1: 'Esterno',
+      sincantu1: 'Tetto',
+      mesu1: 'Tomba 2',
+      forrighesos1: 'Tomba 2',
+      forrighesos2: 'Bassorilievo di toro',
+
 
       anghelu_ruju: {
       cardTitle: "Anghelu Ruju",

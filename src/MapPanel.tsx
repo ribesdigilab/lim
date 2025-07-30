@@ -3,9 +3,10 @@ import React from 'react';
 
 interface MapPanelProps {
   selectedTemple: string;
+  selectedSymbol?: string;
 }
 
-export function MapPanel({ selectedTemple }: MapPanelProps) {
+export function MapPanel({ selectedTemple, selectedSymbol }: MapPanelProps) {
   // Mappa temporanea delle immagini
   const mapImages: Record<string, string> = {
     istevéne: '/map-istevene.png',
@@ -25,11 +26,20 @@ export function MapPanel({ selectedTemple }: MapPanelProps) {
     santandrea_priu: '/map-santandrea_priu.png',
     sos_forrighesos: '/map-sos_furrighesos.png',
     su_crucifissu_mannu: '/map-su_crucifissu_mannu.png',
-    
+  };
 
+  // Posizioni relative dei simboli nella mappa (0–100%)
+  const symbolPositions: Record<string, { x: number; y: number }> = {
+    mandras1: { x: 30, y: 60 },
+    forrighesos1: { x: 50, y: 40 },
+    forrighesos2: { x: 70, y: 27 },
+    sincantu1: { x: 40, y: 50 },
+    mesu1: { x: 55, y: 45 },
+    
   };
 
   const imageSrc = mapImages[selectedTemple] || '/map-placeholder.svg';
+  const point = selectedSymbol ? symbolPositions[selectedSymbol] : null;
 
   return (
     <div
@@ -41,9 +51,19 @@ export function MapPanel({ selectedTemple }: MapPanelProps) {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      
-      <div className="flex items-center justify-center h-full" style={{ filter: "brightness(0) invert(1)" }}>
+      <div className="flex items-center justify-center h-full relative" style={{ filter: "brightness(0) invert(1)" }}>
         <img src={imageSrc} alt={`Mappa di ${selectedTemple}`} className="w-full h-full object-contain" />
+        {point && (
+          <div
+            className="absolute w-3 h-3 rounded-full bg-red-200 shadow-md"
+            style={{
+              left: `${point.x}%`,
+              top: `${point.y}%`,
+              transform: 'translate(-50%, -50%)',
+              
+            }}
+          />
+        )}
       </div>
     </div>
   );

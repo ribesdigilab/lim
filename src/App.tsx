@@ -16,7 +16,7 @@ const allTemples = [
 
 const symbolsByTemple: Record<string, string[]> = {
   istevéne: [],
-  montessu: [],
+  montessu: ['montessu1'],
   anghelu_ruju: [],
   puttu_codinu: [],
   monte_siseri: ['sincantu1'],
@@ -53,23 +53,27 @@ export default function App() {
   const prevPage = () => setPage(p => Math.max(0, p - 1));
   const nextPage = () => setPage(p => Math.min(totalPages - 1, p + 1));
 
-  const pigmentsByTemple: Record<string, { name: string; value: string; layer:string; desc: string }[]> = {
+  const pigmentsByTemple: Record<string, { name: string; value: string; desc: string }[]> = {
     mandras: [
-      { name: 'Rosso Scuro', value: '#8b0000',layer:'/simboli/mandras/mandras11.png', desc: t('anghelu_ruju.rosso.pigmentDescTitle') },
+      { name: 'Rosso Scuro', value: '#8b0000', desc: t('anghelu_ruju.rosso.pigmentDescTitle') },
       
     ],
     monte_siseri: [
-      { name: 'Rosso Scuro', value: '#ff0000', layer:'/simboli/monte_siseri/sincantu12.png', desc: t('monte_siseri.rosso.pigmentDescTitle') },
-      { name: 'Blu', value: '#0000ff', layer:'/simboli/monte_siseri/sincantu11.png', desc: t('monte_siseri.blu.pigmentDescTitle') },
+      { name: 'Rosso Scuro', value: '#ff0000',  desc: t('monte_siseri.rosso.pigmentDescTitle') },
+      { name: 'Blu', value: '#0000ff',  desc: t('monte_siseri.blu.pigmentDescTitle') },
     ],
      mesu_e_montes: [
-      { name: 'Rosso Scuro', value: '#8b0000',layer:'/simboli/mesu_e_montes/mesu11.png', desc: t('mesu_e_montes.rosso.pigmentDescTitle') },
+      { name: 'Rosso Scuro', value: '#8b0000', desc: t('mesu_e_montes.rosso.pigmentDescTitle') },
       
     ],
     sos_forrighesos: [
-      { name: 'Rosso Scuro', value: '#8b0000', layer:'/simboli/sos_forrighesos/forrighesos11.png', desc: t('sos_forrighesos.rosso.pigmentDescTitle') },
-      { name: 'Rosso Scuro', value: '#8b0000', layer:'/simboli/sos_forrighesos/forrighesos21.png', desc: t('sos_forrighesos.rosso.pigmentDescTitle') },
+      { name: 'Rosso Scuro', value: '#8b0000',  desc: t('sos_forrighesos.rosso.pigmentDescTitle') },
+      { name: 'Rosso Scuro', value: '#8b0000',  desc: t('sos_forrighesos.rosso.pigmentDescTitle') },
     ],
+    montessu: [
+      { name: 'Rosso Scuro', value: '#8b0000', desc: t('montessu.rosso.pigmentDescTitle') },
+    ],
+
   };
 
 
@@ -84,13 +88,17 @@ export default function App() {
     mandras1: {
       '#8b0000': '/simboli/mandras/mandras11.png'
     },
-    mesu_e_montes: {
+    mesu1: {
       '#8b0000': '/simboli/mesu_e_montes/mesu11.png'
     },
     sincantu1: {
       '#ff0000': '/simboli/monte_siseri/sincantu12.png',
       '#0000ff': '/simboli/monte_siseri/sincantu11.png'
     },
+    montessu1: {
+      '#8b0000': '/simboli/montessu/montessu11.png'
+    },
+
   };
 
 
@@ -166,7 +174,7 @@ export default function App() {
       <div className="w-screen h-screen flex flex-col items-center justify-center relative"
         style={{ backgroundImage: `url(/landing_page/${selectedTemple}.png)`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <LanguageSelector />
-        <h1 className="absolute w-40 top-6 inline-block text-center text-white text-4xl font-bold uppercase z-50 drop-shadow pointer-events-none">
+        <h1 className="absolute top-6 pointer-events-none text-center text-white text-6xl uppercase z-50 drop-shadow left-1/2 transform -translate-x-1/2">
           {t(`${selectedTemple}.cardTitle`)}
         </h1>
         <SymbolPanel
@@ -190,7 +198,7 @@ export default function App() {
       <button onClick={() => setSelectedSymbol(null)} className="absolute left-8 bottom-6 w-[5rem] h-[5rem] z-50"
         style={{ backgroundImage: "url('/back.svg')", backgroundSize: '100% 100%' }} />
       <LanguageSelector />
-      <MapPanel selectedTemple={selectedTemple!} />
+      <MapPanel selectedTemple={selectedTemple!} selectedSymbol={selectedSymbol ?? undefined}/>
       <PigmentSelector
         test={t('language')}
         pigments={pigments}
@@ -204,7 +212,7 @@ export default function App() {
             className="absolute top-0 left-0 w-full h-full pointer-events-auto">
             <h1 className="absolute top-6 pointer-events-none text-center text-white text-6xl uppercase z-50 drop-shadow left-1/2 transform -translate-x-1/2">
               {t(`${selectedTemple}.cardTitle`)} <br />
-              <h3 className="text-5xl">{selectedSymbol}</h3>
+              <h3 className="text-5xl">{t(selectedSymbol)}</h3>
             </h1>
             <DrawingCanvas
               ref={canvasRef}
