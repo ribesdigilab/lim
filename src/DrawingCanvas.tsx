@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useImperativeHandle, forwardRef } from 'react';
+import React, { useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
 
 export type DrawingCanvasHandle = {
   resetCanvas: () => void;
@@ -8,155 +8,87 @@ interface DrawingCanvasProps {
   layerSrc: string;
   basePath: string;
   selectedSymbol: string;
+  layerTop?: string;
 }
 
 export const DrawingCanvas = forwardRef<DrawingCanvasHandle, DrawingCanvasProps>(
-  function DrawingCanvas({ layerSrc, basePath, selectedSymbol }, ref) {
+  function DrawingCanvas({ layerSrc, basePath, selectedSymbol, layerTop }, ref) {
     const containerRef = useRef<HTMLDivElement>(null);
-    const displayCanvasRef = useRef<HTMLCanvasElement | null>(null);
-    const drawing = useRef(false);
-
+    const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const baseImageRef = useRef<HTMLImageElement | null>(null);
-    const pigmentImagesRef = useRef<Record<string, HTMLImageElement>>({});
-    const maskCanvasesRef = useRef<Record<string, HTMLCanvasElement>>({});
-    const imagesLoaded = useRef<{ base: boolean; pigments: Record<string, boolean> }>({ base: false, pigments: {} });
+    const pigmentImageRef = useRef<HTMLImageElement | null>(null);
+    const layerTopImageRef = useRef<HTMLImageElement | null>(null);
 
     useImperativeHandle(ref, () => ({
       resetCanvas: () => {
-        // clear all mask canvases
-        Object.values(maskCanvasesRef.current).forEach(mc => {
-          const ctx = mc.getContext('2d');
-          if (ctx) ctx.clearRect(0, 0, mc.width, mc.height);
-        });
-        // re-render everything
         render();
-      }
+      },
     }));
 
-    const render = () => {
-      const base = baseImageRef.current;
-      const display = displayCanvasRef.current;
-      if (!base || !display || !imagesLoaded.current.base) return;
-      const ctx = display.getContext('2d');
-      if (!ctx) return;
-
-      // draw base layer
-      ctx.clearRect(0, 0, display.width, display.height);
-      ctx.drawImage(base, 0, 0, display.width, display.height);
-
-      // draw each pigment layer using its mask
-      Object.keys(maskCanvasesRef.current).forEach(src => {
-        if (!imagesLoaded.current.pigments[src]) return;
-        const pigment = pigmentImagesRef.current[src];
-        const mask = maskCanvasesRef.current[src];
-        if (!pigment || !mask) return;
-
-        // create temporary canvas for masked pigment
-        const tmp = document.createElement('canvas');
-        tmp.width = display.width;
-        tmp.height = display.height;
-        const tctx = tmp.getContext('2d')!;
-        // copy mask
-        tctx.drawImage(mask, 0, 0, tmp.width, tmp.height);
-        // apply pigment only where mask
-        tctx.globalCompositeOperation = 'source-in';
-        tctx.drawImage(pigment, 0, 0, tmp.width, tmp.height);
-        // composite over base
-        ctx.drawImage(tmp, 0, 0);
-      });
-    };
-
-      const handleDraw = (e: PointerEvent) => {
-      if (!drawing.current || !layerSrc) return;
-      const display = displayCanvasRef.current;
-      if (!display) return;
-
-      const rect = display.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 1024;
-      const y = ((e.clientY - rect.top) / rect.height) * 1024;
-
-      // Cancella quel punto da tutte le maschere
-      Object.entries(maskCanvasesRef.current).forEach(([src, canvas]) => {
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-
-        ctx.save();
-        ctx.globalCompositeOperation = (src === layerSrc) ? 'source-over' : 'destination-out';
-        ctx.fillStyle = 'white';
-        ctx.beginPath();
-        ctx.arc(x, y, 30, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      });
-
-      render();
-    };
-
-    // initialize base canvas and base image
     useEffect(() => {
-      const container = containerRef.current;
-      if (!container) return;
-      container.innerHTML = '';
-
       const canvas = document.createElement('canvas');
       canvas.width = 1024;
       canvas.height = 1024;
       canvas.style.width = '100%';
       canvas.style.height = '100%';
-      displayCanvasRef.current = canvas;
-      container.appendChild(canvas);
 
-      imagesLoaded.current = { base: false, pigments: {} };
-      maskCanvasesRef.current = {};
-      pigmentImagesRef.current = {};
+      canvasRef.current = canvas;
 
+      if (containerRef.current) {
+        containerRef.current.innerHTML = '';
+        containerRef.current.appendChild(canvas);
+      }
+
+      loadImages();
+    }, [basePath, selectedSymbol, layerSrc, layerTop]);
+
+    const loadImages = () => {
       const base = new Image();
       base.src = `${basePath}/${selectedSymbol}.png`;
       base.onload = () => {
-        imagesLoaded.current.base = true;
+        baseImageRef.current = base;
         render();
       };
-      baseImageRef.current = base;
-    }, [basePath, selectedSymbol]);
 
-    // update mask & pigment on layerSrc change
-    useEffect(() => {
-      if (!layerSrc) return;
-      // ensure mask canvas exists
-      if (!maskCanvasesRef.current[layerSrc]) {
-        const mc = document.createElement('canvas');
-        mc.width = 1024;
-        mc.height = 1024;
-        maskCanvasesRef.current[layerSrc] = mc;
+      if (layerSrc) {
+        const pigment = new Image();
+        pigment.src = layerSrc;
+        pigment.onload = () => {
+          pigmentImageRef.current = pigment;
+          render();
+        };
+      } else {
+        pigmentImageRef.current = null;
       }
-      // load pigment image fresh
-      const pigment = new Image();
-      pigment.src = layerSrc;
-      pigment.onload = () => {
-        imagesLoaded.current.pigments[layerSrc] = true;
-        pigmentImagesRef.current[layerSrc] = pigment;
-        render();
-      };
-    }, [layerSrc]);
 
-    // pointer events
-    useEffect(() => {
-      const canvas = displayCanvasRef.current;
-      if (!canvas) return;
-      const down = () => (drawing.current = true);
-      const up = () => (drawing.current = false);
-      const leave = () => (drawing.current = false);
-      canvas.addEventListener('pointerdown', down);
-      canvas.addEventListener('pointerup', up);
-      canvas.addEventListener('pointerleave', leave);
-      canvas.addEventListener('pointermove', handleDraw);
-      return () => {
-        canvas.removeEventListener('pointerdown', down);
-        canvas.removeEventListener('pointerup', up);
-        canvas.removeEventListener('pointerleave', leave);
-        canvas.removeEventListener('pointermove', handleDraw);
-      };
-    }, [layerSrc]);
+      if (layerTop) {
+        const top = new Image();
+        top.src = layerTop;
+        top.onload = () => {
+          layerTopImageRef.current = top;
+          render();
+        };
+      } else {
+        layerTopImageRef.current = null;
+      }
+    };
+
+    const render = () => {
+      const canvas = canvasRef.current;
+      const ctx = canvas?.getContext('2d');
+      if (!ctx || !baseImageRef.current) return;
+
+      ctx.clearRect(0, 0, 1024, 1024);
+      ctx.drawImage(baseImageRef.current, 0, 0, 1024, 1024);
+
+      if (pigmentImageRef.current) {
+        ctx.drawImage(pigmentImageRef.current, 0, 0, 1024, 1024);
+      }
+
+      if (layerTopImageRef.current) {
+        ctx.drawImage(layerTopImageRef.current, 0, 0, 1024, 1024);
+      }
+    };
 
     return <div ref={containerRef} className="absolute top-0 left-0 w-full h-full" />;
   }

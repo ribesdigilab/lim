@@ -83,7 +83,8 @@ export default function App() {
       '#8b0000': '/simboli/sos_forrighesos/forrighesos11.png'
     },
     forrighesos2: {
-      '#8b0000': '/simboli/sos_forrighesos/forrighesos21.png'
+      '#8b0000': '/simboli/sos_forrighesos/forrighesos21.png',
+
     },
     mandras1: {
       '#8b0000': '/simboli/mandras/mandras11.png'
@@ -101,19 +102,22 @@ export default function App() {
 
   };
 
-
+  const [layerTop, setLayerTop] = useState<string | undefined>(undefined);
   const pigments = selectedTemple ? pigmentsByTemple[selectedTemple] ?? [] : [];
 
-  const currentLayer = selectedSymbol ? layersBySymbolAndColor[selectedSymbol]?.[color] : undefined;
+const currentLayer = selectedSymbol && color
+  ? layersBySymbolAndColor[selectedSymbol]?.[color]
+  : undefined;
+
+useEffect(() => {
+  setColor('');
+}, [selectedTemple]);
 
 
-  useEffect(() => {
-  if (pigments.length > 0 && (!color || !pigments.some(p => p.value === color))) {
-    setColor(pigments[0].value);
-  }
-}, [pigments]);
-
-  const handleReset = () => canvasRef.current?.resetCanvas();
+  const handleReset = () => {
+  setColor(''); // deseleziona il colore
+  canvasRef.current?.resetCanvas(); // aggiorna il canvas
+};
   const handleTempleBack = () => {
     setSelectedTemple(null);
     setSelectedSymbol(null);
@@ -205,6 +209,11 @@ export default function App() {
         currentColor={color}
         onSelect={setColor}
         onReset={handleReset}
+        onLayerTop={() => {
+          if (selectedTemple && selectedSymbol) {
+            setLayerTop(`/simboli/${selectedTemple}/${selectedSymbol}_top.png`);
+          }
+        }}
       />
       <AnimatePresence>
         {selectedSymbol && (
@@ -219,6 +228,7 @@ export default function App() {
               basePath={`/simboli/${selectedTemple}`}
               selectedSymbol={selectedSymbol!}
               layerSrc={currentLayer!}
+              layerTop={layerTop}
             />
           </motion.div>
         )}
