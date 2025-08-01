@@ -14,7 +14,7 @@ interface PigmentSelectorProps {
   onLayerTop: () => void; // ✅ nuova prop
 }
 
-export function PigmentSelector({ test, pigments, currentColor, onSelect, onReset, onLayerTop }: PigmentSelectorProps) {
+export function PigmentSelector({ test, pigments, currentColor, onSelect, onReset,onLayerTop }: PigmentSelectorProps) {
   const { t, i18n } = useTranslation();
   const [activeInfo, setActiveInfo] = useState<string | null>(null);
   const changeLanguage = (lng: string) => i18n.changeLanguage(lng);
@@ -35,7 +35,7 @@ export function PigmentSelector({ test, pigments, currentColor, onSelect, onRese
     <div className="flex flex-col relative h-full w-full pointer-events-none">
       {/* Pigment selection panel */}
       <div
-        className="absolute top-[15rem] right-0 m-4 w-[14rem] h-[30rem] p-6 shadow-lg backdrop-blur-sm pointer-events-auto z-50"
+        className="absolute top-[10rem] right-0 m-4 w-[14rem] h-[20rem] p-6 shadow-lg backdrop-blur-sm pointer-events-auto z-50"
         style={{
           backgroundImage: "url('/Rectangle vert.png')",
           backgroundSize: '100% 100%',
@@ -65,27 +65,31 @@ export function PigmentSelector({ test, pigments, currentColor, onSelect, onRese
               </button>
             </div>
           ))}
-
-          <button
-            onClick={onReset}
-            className="absolute bottom-4 w-[4rem] h-[4rem] m-14 mt-2 pointer-events-auto"style={{
-            backgroundImage: "url('/reset.svg')",
-            backgroundSize: '100% 100%',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}>
-            <button
-              onClick={onLayerTop}
-              className="w-[4rem] h-[4rem]"
-              style={{
-                backgroundImage: "url('/reset.svg')",
-                backgroundSize: '100% 100%',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-              }}
-            />
+          
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-4 pointer-events-auto">
+  <button
+    onClick={onReset}
+    className="w-[4rem] h-[4rem]"
+    style={{
+      backgroundImage: "url('/reset.svg')",
+      backgroundSize: '100% 100%',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+    }}
+  />
+  <button
+    onClick={onLayerTop}
+    className="w-[4rem] h-[4rem]"
+    style={{
+      backgroundImage: "url('/top.svg')", // cambia se serve
+      backgroundSize: '100% 100%',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+    }}
+  />
+</div>
             
-          </button>
+          
         </div>
       </div>
 
@@ -118,28 +122,29 @@ export function PigmentSelector({ test, pigments, currentColor, onSelect, onRese
             <p className="text-lg text-center">{pigment?.desc}</p>
           </div>
 
-          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-4">
-  <button
-    onClick={onReset}
-    className="w-[4rem] h-[4rem] pointer-events-auto"
-    style={{
-      backgroundImage: "url('/reset.svg')",
-      backgroundSize: '100% 100%',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-    }}
-  />
-  <button
-    onClick={onLayerTop}
-    className="w-[4rem] h-[5rem] pointer-events-auto"
-    style={{
-      backgroundImage: "url('/reset.svg')",
-      backgroundSize: '100% 100%',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-    }}
-  />
-</div>
+          <button
+            className="absolute right-16 top-1/2 w-[5rem] h-[5rem] pointer-events-auto"
+            onClick={goToNext}
+            style={{
+            backgroundImage: "url('/forward.svg')",
+            backgroundSize: '100% 100%',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+            >
+            
+          </button>
+
+          <button
+            className="absolute bottom-4 w-[5rem] h-[5rem] pointer-events-auto"
+            onClick={() => setActiveInfo(null)}
+            style={{
+              backgroundImage: "url('/close.svg')",
+              backgroundSize: '100% 100%',
+              backgroundPosition: 'bottom',
+              backgroundRepeat: 'no-repeat',
+            }}>
+          </button>
         </div>
       )}
     </div>

@@ -7,9 +7,9 @@ interface SymbolProps {
 
 export function SymbolPanel({ symbols, onSelect }: SymbolProps) {
   return (
-    <div className="absolute top-0 left-0 m-4 p-4 z-50">
+    <div className="absolute top-0 left-0 m-4 z-50">
       <div
-        className="shadow-lg rounded-md p-4 backdrop-blur-sm h-[20rem] w-[6rem]"
+        className="shadow-lg rounded-md p-4 backdrop-blur-sm h-[30rem] w-[6rem]"
         style={{
           backgroundImage: "url('/Rectangle vert.png')",
           backgroundSize: '100% 100%',

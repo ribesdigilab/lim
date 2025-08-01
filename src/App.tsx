@@ -103,7 +103,14 @@ export default function App() {
   };
 
   const [layerTop, setLayerTop] = useState<string | undefined>(undefined);
-  const pigments = selectedTemple ? pigmentsByTemple[selectedTemple] ?? [] : [];
+  const rawPigments = selectedTemple ? pigmentsByTemple[selectedTemple] ?? [] : [];
+
+  const pigments = rawPigments.filter(
+  (p, index, self) =>
+    index === self.findIndex(
+      other => other.value === p.value && other.name === p.name && other.desc === p.desc
+    )
+);
 
 const currentLayer = selectedSymbol && color
   ? layersBySymbolAndColor[selectedSymbol]?.[color]
@@ -111,11 +118,21 @@ const currentLayer = selectedSymbol && color
 
 useEffect(() => {
   setColor('');
+  setLayerTop(undefined); 
 }, [selectedTemple]);
+
+useEffect(() => {
+  setLayerTop(undefined); // resetta il layer top quando cambi simbolo
+}, [selectedSymbol]);
+
+useEffect(() => {
+  setLayerTop(undefined); // Rimuove il layer top quando cambi colore
+}, [color]);
 
 
   const handleReset = () => {
   setColor(''); // deseleziona il colore
+  setLayerTop(undefined); // nasconde il top layer
   canvasRef.current?.resetCanvas(); // aggiorna il canvas
 };
   const handleTempleBack = () => {
@@ -129,12 +146,18 @@ useEffect(() => {
         style={{ backgroundImage: `url(/screensaver.png)`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <button
           onClick={() => setShowStartScreen(false)}
-          className="text-white w-auto h-[15rem] px-14 py-6 text-3xl transition uppercase"
+          className="text-white w-auto h-[15rem] pt-12 px-14 py-6 text-3xl transition uppercase"
           style={{ backgroundImage: "url('/Rectangle 1.png')", backgroundSize: '100% 100%' }}
         >
           {t('Il muro dei pigmenti')}<br />
           <div className="text-sm mt-12">{t('Tocca per continuare')}</div>
+          <img
+          src="/arrow_back.svg"
+          alt="Freccia"
+          className="mt-4 w-8 h-8 mx-auto"
+        />
         </button>
+
       </div>
     );
   }
@@ -147,7 +170,7 @@ useEffect(() => {
         <div className="relative p-8 flex flex-col items-center space-y-4">
           <div className="flex items-center space-x-4  backdrop-blur-sm">
             <button onClick={prevPage} disabled={page === 0} className="w-[5rem] h-[5rem]"
-              style={{ backgroundImage: "url('/back.svg')", backgroundSize: 'contain', opacity: page === 0 ? 0.3 : 1 }} />
+              style={{ backgroundImage: "url('/back.svg')", backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', opacity: page === 0 ? 0.3 : 1 }} />
             <div style={{ backgroundImage: "url('/Rectangle 1.png')", backgroundSize: '100% 100%' }}>
               <h1 className="text-white text-4xl pt-4 mt-8 uppercase text-center">{t('Scegli la Domus')}</h1>
               <div className="grid grid-cols-3 p-4 gap-4 ml-10 mr-10">
@@ -164,7 +187,7 @@ useEffect(() => {
               <div className="text-white flex item-center justify-center mb-8">{page + 1} / {totalPages}</div>
             </div>
             <button onClick={nextPage} disabled={page === totalPages - 1} className="w-[5rem] h-[5rem]"
-              style={{ backgroundImage: "url('/forward.svg')", backgroundSize: 'contain', opacity: page === totalPages - 1 ? 0.3 : 1 }} />
+              style={{ backgroundImage: "url('/forward.svg')", backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', opacity: page === totalPages - 1 ? 0.3 : 1 }} />
           </div>
         </div>
         <button onClick={() => setShowStartScreen(true)} className="absolute left-8 bottom-6 w-[5rem] h-[5rem] z-50"
@@ -178,17 +201,16 @@ useEffect(() => {
       <div className="w-screen h-screen flex flex-col items-center justify-center relative"
         style={{ backgroundImage: `url(/landing_page/${selectedTemple}.png)`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <LanguageSelector />
-        <h1 className="absolute top-6 pointer-events-none text-center text-white text-6xl uppercase z-50 drop-shadow left-1/2 transform -translate-x-1/2">
-          {t(`${selectedTemple}.cardTitle`)}
-        </h1>
+       
+
         <SymbolPanel
           symbols={symbolsByTemple[selectedTemple] || []}
           onSelect={sym => setSelectedSymbol(sym)}
         />
         <MapPanel selectedTemple={selectedTemple!} />
-        <button onClick={handleTempleBack} className="absolute left-8 bottom-6 w-[5rem] h-[5rem] z-50"
+        <button onClick={handleTempleBack} className="absolute left-6 bottom-6 w-[5rem] h-[5rem] z-50"
           style={{ backgroundImage: "url('/back.svg')", backgroundSize: '100% 100%' }} />
-        <PanelInfo selectedTemple={selectedTemple!} />
+        <PanelInfo selectedTemple={selectedTemple!} allTemples={allTemples}/>
       </div>
     );
   }
@@ -202,7 +224,7 @@ useEffect(() => {
       <button onClick={() => setSelectedSymbol(null)} className="absolute left-8 bottom-6 w-[5rem] h-[5rem] z-50"
         style={{ backgroundImage: "url('/back.svg')", backgroundSize: '100% 100%' }} />
       <LanguageSelector />
-      <MapPanel selectedTemple={selectedTemple!} selectedSymbol={selectedSymbol ?? undefined}/>
+      <MapPanel selectedTemple={selectedTemple!} selectedSymbol={selectedSymbol ?? undefined} />
       <PigmentSelector
         test={t('language')}
         pigments={pigments}
@@ -219,10 +241,9 @@ useEffect(() => {
         {selectedSymbol && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.8 }}
             className="absolute top-0 left-0 w-full h-full pointer-events-auto">
-            <h1 className="absolute top-6 pointer-events-none text-center text-white text-6xl uppercase z-50 drop-shadow left-1/2 transform -translate-x-1/2">
-              {t(`${selectedTemple}.cardTitle`)} <br />
-              <h3 className="text-5xl">{t(selectedSymbol)}</h3>
-            </h1>
+            
+
+
             <DrawingCanvas
               ref={canvasRef}
               basePath={`/simboli/${selectedTemple}`}
